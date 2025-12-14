@@ -1,0 +1,17 @@
+{
+    "name": "php8/mvc",
+    "description": "electroshop ecommerce web application",
+    "authors": [
+        {
+            "name": "max",
+            "email": "www.max.021persia@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "require": {}
+}

@@ -1,0 +1,17 @@
+{
+  "name": "mvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass:build": "sass --no-source-map scss:public/css" , 
+    "sass:watch": "sass --no-source-map --watch scss:/public/css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.96.0"
+  }
+}
