@@ -1,11 +1,12 @@
 <?php
 
+
 $router->add('GET',  '/', 'HomeController@index');
 
 
 
 // auth routes 
-// $router->    add("GET", '/login');
+$router->add("GET", '/login' , 'AuthController@index');
 // $router->add("POST", '/login');
 // $router->add("POST", '/logout');
 
