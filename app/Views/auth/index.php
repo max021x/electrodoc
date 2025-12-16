@@ -20,8 +20,8 @@
                 <div class="mt-3 mx-2">
                     <a href="">Forgot Password ?</a>
                 </div>
-                <div class="mt-3 mx-2">
-                    <a href="">Return to Home <i class="fas fa-home"></i></a>
+                <div class="mt-2 mx-2">
+                    <a href="/register">Create new Account <i class="fas fa-hand-o-left"></i></a>
                 </div>
             </form>
         </div>
