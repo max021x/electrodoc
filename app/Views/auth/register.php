@@ -7,12 +7,20 @@
         <div class="card-body">
             <form>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <label for="name" class="form-label">User name</label>
+                    <input type="name" class="form-control" name="name" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" name="password" id="password">
+                </div>
+                <div class="mb-3">
+                    <label for="password-confirm" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="password-confirm" id="password">
                 </div>
                 <div class="d-grid">
                     <button class="btn btn-primary btn-lg">Login</button>

@@ -10,7 +10,7 @@ class AuthController
     public function index()
     {
         return Viewer::render(
-            'auth/index',
+            'auth/login',
             ['dnone' => true],
             'layouts/main'
         );

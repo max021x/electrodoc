@@ -10,7 +10,7 @@ $router->add("GET", '/login' , 'AuthController@index');
 // $router->add("POST", '/login');
 // $router->add("POST", '/logout');
 
-// $router->add("GET" , '/register');
+$router->add("GET" , '/register' , 'RegisterController@index');
 // $router->add("POST" , '/register');
 
 
