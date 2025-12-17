@@ -1,7 +1,7 @@
 <?php
 
 namespace Core;
-
+use Core\Viewer ; 
 class Router
 {
 
@@ -30,7 +30,7 @@ class Router
     public static function notFound()
     {
         http_response_code(404);
-        echo View::render('errors/404.php');
+        echo Viewer::render('errors/404' , ['dnone' => true] , 'layouts/main');
         exit;
     }
 

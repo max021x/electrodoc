@@ -7,8 +7,8 @@
     <title>Electro Shop</title>
     <link rel="icon" href="">
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
                             <a class="nav-link" href="/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Feedback</a>
+                            <a class="nav-link" href="#contact">Contact</a>
                         </li>
                         <li class="nav-item">
                             <a href="" class="nav-link"><i class="fas fa-moon"></i></a>
