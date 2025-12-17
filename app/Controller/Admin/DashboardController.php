@@ -10,18 +10,18 @@ class DashboardController
 
     public function index()
     {
-        return Viewer::render('admin/dashboard', [], 'admin/layouts/main');
+        return Viewer::render('admin/dashboard', ['active' => 'dashboard'], 'admin/layouts/main');
     }
     // show all posts
     public function posts()
     {
         // select * posts  ; 
-        return Viewer::render('admin/adminPosts', [], 'admin/layouts/main');
+        return Viewer::render('admin/adminPosts', ['active' => 'posts'], 'admin/layouts/main');
     }
     // create post from
     public function create() {
         // show from here
-        return Viewer::render('admin/adminCreate' , [] , 'admin/layouts/main') ; 
+        return Viewer::render('admin/adminCreate' , ['active' => 'create'] , 'admin/layouts/main') ; 
     }
     // store post
     public function store() {}
