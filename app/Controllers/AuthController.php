@@ -30,6 +30,6 @@ class AuthController
     public function logout()
     {
         Auth::logout();
-        Router::redirect('/');
+        Router::redirect('/login');
     }
 }
