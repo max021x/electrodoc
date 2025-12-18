@@ -26,7 +26,7 @@ $router->add("GET", '/admin/posts/create', 'Admin\DashboardController@create');
 
 // user 
 $router->add("GET" , '/posts' , 'PostController@index') ; 
-// $router->add("GET" , '/post/{id}') ; 
+$router->add("GET" , '/posts/{id}' , 'PostController@show') ; 
 // $router->add("GET" , '/category/{slug}');
 // $router->add("GET" , '/profile');
 
