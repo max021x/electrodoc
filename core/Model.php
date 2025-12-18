@@ -23,7 +23,7 @@ class Model
     {
         $db = App::get('database');
         $columns = implode(', ', array_keys($data));
-        $placeholder = implode(', ', array_fill(0, count($columns), '?'));
+        $placeholder = implode(', ', array_fill(0, count($data), '?'));
         $sql  = "INSERT INTO " . static::$table . " ($columns) VALUES($placeholder)";
         $db->query($sql, array_values($data));
     }
