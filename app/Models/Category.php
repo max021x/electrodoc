@@ -6,7 +6,7 @@ use Core\Model;
 
 class Category extends Model
 {
-    protected static string $table = 'category' ; 
+    protected static string $table = 'categories' ; 
     public $id;
     public $name ; 
     public $created_at;
