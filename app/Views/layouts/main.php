@@ -45,7 +45,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav ms-auto ">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/posts">Posts</a>
@@ -54,7 +54,7 @@
                             <a class="nav-link" href="/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
+                            <a class="nav-link" href="/#contact">Contact</a>
                         </li>
                         <li class="nav-item">
                             <a href="" class="nav-link"><i class="fas fa-moon"></i></a>
