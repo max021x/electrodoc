@@ -48,7 +48,7 @@
                             <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Posts</a>
+                            <a class="nav-link" href="/posts">Posts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/login">Login</a>
@@ -82,7 +82,7 @@
     </main>
 
 
-    <footer class="footer bg-light py-6 <?= isset($dnone) ? 'd-none' : ''?>">
+    <footer class="footer bg-light py-2 <?= isset($dnone) ? 'd-none' : ''?>">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 my-3">

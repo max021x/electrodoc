@@ -48,4 +48,13 @@ class Model
         $db->query($sql, $params);
         return $this;
     }
+
+    public function delete () {
+        if(!isset($this->id)) {
+            return ; 
+        }
+        $db = App::get('database') ; 
+        $sql = "DELETE FROM " . static::$table . " WHERE id = ?" ; 
+        $db->quey($sql , [$this->id]); 
+    }
 }

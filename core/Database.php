@@ -18,11 +18,15 @@ class Database
             $dsn = $this->createDsn($config);
             $username = $config['username'] ?? null;
             $password = $config['password'] ?? null;
-            $options = $config['options'] ?? null;
 
-            $this->pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION]);
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_EMULATE_PREPARES => false, // ← This is important!
+            ];
+
+            $this->pdo = new PDO($dsn, $username, $password, $options);
         } catch (PDOException $e) {
-            throw new Exception("Could not connect to the Database ");
+            throw new Exception("Could not connect to the Database: " . $e->getMessage());
         }
     }
 
@@ -53,9 +57,9 @@ class Database
 
     public function fetch(string $sql, array $params = [], ?string $classname = null): mixed
     {
-        $stmt = $this->query($sql, $params); 
-        $stmt->setFetchMode($classname ? PDO::FETCH_CLASS : PDO::FETCH_ASSOC , $classname);
-        return $stmt->fetch() ; 
+        $stmt = $this->query($sql, $params);
+        $stmt->setFetchMode($classname ? PDO::FETCH_CLASS : PDO::FETCH_ASSOC, $classname);
+        return $stmt->fetch();
     }
 
     public function lastInsertId(): string|false
