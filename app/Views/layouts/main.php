@@ -14,7 +14,7 @@
 <body>
 
     <!--  -->
-    <nav class="navbar navbar-expand-md bg-white fixed-top <?= isset($dnone) ? 'd-none' : ''?>">
+    <nav class="navbar navbar-expand-md bg-white fixed-top <?= isset($dnone) ? 'd-none' : '' ?>">
         <div class="container-md">
 
             <a class="navbar-brand" href="#"><img class="img-fluid" alt="">ElectroShop</a>
@@ -51,7 +51,13 @@
                             <a class="nav-link" href="/posts">Posts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
+                            <?php if (isset($user)): ?>
+                                <form action="/logout" method="POST">
+                                    <button class="btn btn-danger" type="submit">Logout (<?= $user->email ?>)</button>
+                                </form>
+                            <?php else : ?>
+                                <a class="nav-link" href="/login">login</a>
+                            <?php endif ?> 
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/#contact">Contact</a>
@@ -82,7 +88,7 @@
     </main>
 
 
-    <footer class="footer bg-light py-2 <?= isset($dnone) ? 'd-none' : ''?>">
+    <footer class="footer bg-light py-2 <?= isset($dnone) ? 'd-none' : '' ?>">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 my-3">

@@ -2,21 +2,34 @@
 
 namespace App\Controllers;
 
+use Core\Router;
 use Core\Viewer;
+use App\Services\Auth ; 
 
 class AuthController
 {
 
+
     public function index()
     {
-        return Viewer::render(
-            'auth/login',
-            ['dnone' => true],
-            'layouts/main'
-        );
+        return Viewer::render('auth/login', ['dnone' => true], 'layouts/main');
     }
 
-    public function auth() {}
+    public function auth()
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-    public function logout() {}
+        if (Auth::attempt($email, $password)) {
+            Router::redirect('/');
+        }
+
+        return Viewer::render('auth/login', ['dnone' => true , 'error' => "Invalid Credentials"], 'layouts/main');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Router::redirect('/');
+    }
 }

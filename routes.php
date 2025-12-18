@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Auth;
 
 $router->add('GET',  '/', 'HomeController@index');
 
@@ -7,8 +8,8 @@ $router->add('GET',  '/', 'HomeController@index');
 
 // auth routes 
 $router->add("GET", '/login', 'AuthController@index');
-// $router->add("POST", '/login');
-// $router->add("POST", '/logout');
+$router->add("POST", '/login' , 'AuthController@auth' );
+$router->add("POST", '/logout' , 'AuthController@logout' );
 
 $router->add("GET", '/register', 'RegisterController@index');
 // $router->add("POST" , '/register');
