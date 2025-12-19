@@ -34,3 +34,11 @@ CREATE TABLE IF NOT EXISTS comments (
     FOREIGN KEY (post_id) REFERENCES posts(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+CREATE Table IF NOT  EXISTS contactmessages(
+    id INT AUTO_INCREMENT PRIMARY KEY , 
+    name VARCHAR(100) NOT NULL , 
+    email VARCHAR(100) NOT NULL , 
+    message TEXT NOT NULL , 
+    ip VARBINARY(16) NOT NULL , 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

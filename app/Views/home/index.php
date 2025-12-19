@@ -143,27 +143,27 @@
                 <div class="col-lg-6">
                     <div class="text-container">
                         <h2>Contact Us For A Quote</h2>
-                        <form>
+                        <form action="/contact" method="POST">
                             <div class="mb-3">
                                 <input
+                                    name="name"
+                                    id="name"
                                     type="text"
                                     class="form-control"
                                     placeholder="Enter name" />
                             </div>
                             <div class="mb-3">
                                 <input
+                                    name="email"
+                                    id="email"
                                     type="email"
                                     class="form-control"
                                     placeholder="Enter email" />
                             </div>
                             <div class="mb-3">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Enter phone" />
-                            </div>
-                            <div class="mb-3">
                                 <textarea
+                                    name="message"
+                                    id="message"
                                     class="form-control"
                                     placeholder="Enter message"
                                     rows="8"></textarea>
