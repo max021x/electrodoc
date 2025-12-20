@@ -2,9 +2,13 @@
 
 use App\Services\Auth;
 
+use App\Middlewares\ViewMiddleware ; 
+
+
+$router->addGlobalMiddleware(ViewMiddleware::class) ; 
+
+// routes
 $router->add('GET',  '/', 'HomeController@index');
-
-
 
 // auth routes 
 $router->add("GET", '/login', 'AuthController@index');

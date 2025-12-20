@@ -8,15 +8,40 @@ class Router
 {
 
     protected array $routes = [];
+    protected array $globalMiddlewares = [];
+    protected array $routeMiddlewares = [];
 
-    public function add(string $method, string $uri, string $controller): void
+    public function add(string $method, string $uri, string $controller , array $middlewares = []): void
     {
         $this->routes[] = [
             'method' => $method,
             'uri' => $uri,
-            'controller' => $controller,
+            'controller' => $controller, 
+            'middlewares' => $middlewares
         ];
     }
+
+    protected function runMiddleware(array $middlewares, callable $target)
+    {
+        $next = $target;
+        foreach (array_reverse($middlewares) as $middleware) {
+            $next = fn() => (new $middleware)->handle($next);
+        }
+
+        return $next();
+    }
+
+    public function  addGlobalMiddleware(string $middleware)
+    {
+        $this->globalMiddlewares[] = $middleware;
+    }
+
+
+    public function addRouteMiddleware(string $name, string $middleware)
+    {
+        $this->routeMiddlewares[$name] = $middleware;
+    }
+
     public function dispatch(string $uri, string $method): ?string
     {
         $route = $this->findRoute($uri, $method);
@@ -25,8 +50,15 @@ class Router
             return static::notFound();
         }
 
-        [$controller, $action] = explode('@', $route['controller']);
-        return $this->callAction($controller, $action, $route['params']);
+        $middlewares =  [
+            ...$this->globalMiddlewares,
+            ...array_map(fn($name) => $this->routeMiddlewares[$name], $route['middlewares'])
+        ];
+
+        return $this->runMiddleware($middlewares, function () use ($route) {
+            [$controller, $action] = explode('@', $route['controller']);
+            return $this->callAction($controller, $action, $route['params']);
+        });
     }
 
     public function findRoute(string $uri, string $method): ?array

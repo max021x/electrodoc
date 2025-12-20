@@ -14,7 +14,6 @@ $router = new Router ;
 
 require_once "../routes.php" ; 
 
-Viewer::share("user" , Auth::user()) ; 
 
 
 $uri = parse_url($_SERVER['REQUEST_URI'] , PHP_URL_PATH) ; 
