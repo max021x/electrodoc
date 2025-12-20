@@ -2,6 +2,7 @@
 
 namespace App\Controllers ;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Core\Router;
@@ -15,6 +16,7 @@ class PostController {
     }
 
     public function show ($id) {
+        
         $post = Post::find($id) ; 
         $username = User::find($post->user_id)->name; 
         // var_dump($username) ; die ; 
@@ -23,7 +25,8 @@ class PostController {
         }
 
         // $comments 
-        return Viewer::render('posts/show' , ['post' => $post , 'author_name' => $username] , 'layouts/main') ; 
+        $comments = Comment::forPost($id) ;
+        return Viewer::render('posts/show' , ['post' => $post , 'author_name' => $username , 'comments' => $comments] , 'layouts/main') ; 
     }
 
 }

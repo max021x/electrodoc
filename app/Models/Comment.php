@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Core\Model;
+use Core\App ; 
 
 class Comment extends Model
 {
@@ -13,4 +14,11 @@ class Comment extends Model
     public $user_id;
     public $created_at;
     public $updated_at;
+
+    public static function forPost($id)
+    {
+        $db = App::get('database');
+        $sql = "SELECT * FROM " . static::$table .  " WHERE post_id = ?";
+        return $db->fetchAll($sql, [$id] , static::class);
+    }
 }
