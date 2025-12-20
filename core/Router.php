@@ -1,7 +1,9 @@
 <?php
 
 namespace Core;
-use Core\Viewer ; 
+
+use Core\Viewer;
+
 class Router
 {
 
@@ -15,7 +17,7 @@ class Router
             'controller' => $controller,
         ];
     }
-    public function dispatch(string $uri, string $method):?string
+    public function dispatch(string $uri, string $method): ?string
     {
         $route = $this->findRoute($uri, $method);
 
@@ -26,21 +28,6 @@ class Router
         [$controller, $action] = explode('@', $route['controller']);
         return $this->callAction($controller, $action, $route['params']);
     }
-
-    public static function notFound()
-    {
-        http_response_code(404);
-        echo Viewer::render('errors/404' , ['dnone' => true] , 'layouts/main');
-        exit;
-    }
-
-
-    public static function redirect(string $uri): void
-    {
-        header("Location: $uri");
-        exit();
-    }
-
 
     public function findRoute(string $uri, string $method): ?array
     {
@@ -78,10 +65,24 @@ class Router
         return $params;
     }
 
-    protected function callAction(string $controller, string $action, array $params):?string
+    protected function callAction(string $controller, string $action, array $params): ?string
     {
         $controllerClass = "App\\Controllers\\$controller";
 
         return (new $controllerClass)->$action(...$params);
+    }
+
+    public static function notFound()
+    {
+        http_response_code(404);
+        echo Viewer::render('errors/404', ['dnone' => true], 'layouts/main');
+        exit;
+    }
+
+
+    public static function redirect(string $uri): void
+    {
+        header("Location: $uri");
+        exit();
     }
 }
