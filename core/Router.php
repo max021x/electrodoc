@@ -111,6 +111,14 @@ class Router
         exit;
     }
 
+    
+    public static function unauthorized()
+    {
+        http_response_code(401);
+        echo Viewer::render('errors/401', ['dnone' => true], 'layouts/main');
+        exit;
+    }
+
 
     public static function redirect(string $uri): void
     {

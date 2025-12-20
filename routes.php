@@ -1,11 +1,13 @@
 <?php
 
+use App\Middlewares\AuthMiddleware;
 use App\Services\Auth;
 
 use App\Middlewares\ViewMiddleware ; 
 
 
 $router->addGlobalMiddleware(ViewMiddleware::class) ; 
+$router->addRouteMiddleware('auth' , AuthMiddleware::class) ; 
 
 // routes
 $router->add('GET',  '/', 'HomeController@index');
@@ -34,7 +36,7 @@ $router->add("GET" , '/posts' , 'PostController@index') ;
 $router->add("GET" , '/posts/{id}' , 'PostController@show') ; 
 $router->add("POST" , '/contact' , 'ContactController@store') ;
 
-$router->add("POST" , '/posts/{id}/comments' , 'CommentController@store') ; 
+$router->add("POST" , '/posts/{id}/comments' , 'CommentController@store' , ['auth']) ; 
 // $router->add("GET" , '/category/{slug}');
 // $router->add("GET" , '/profile');
 
