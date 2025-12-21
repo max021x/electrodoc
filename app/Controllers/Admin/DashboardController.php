@@ -16,6 +16,6 @@ class DashboardController
         // $recentPosts = Post::getRecent(5);
         // $recentComments = Comment::getRecent(5);
         
-        return Viewer::render('admin/dashboard/index' , [] , 'admin/layouts/main');
+        return Viewer::render('admin/dashboard/index' , ['active' => 'dashboard'] , 'admin/layouts/main');
     }
 }

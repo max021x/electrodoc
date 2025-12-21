@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\Post;
+use App\Services\Authorization;
 use Core\Viewer;
 
 
@@ -9,12 +11,14 @@ class PostController
 {
 
     public function index()
-    {
-        return Viewer::render('admin/dashboard', ['active' => 'dashboard'], 'admin/layouts/main');
+    {   
+        Authorization::verify('dashboard') ; 
+        $posts = Post::all() ;
+        return Viewer::render('admin/posts/index', ['active' => 'posts' , 'posts' => $posts], 'admin/layouts/main');
     }
 
     public function create() {
-        return Viewer::render('admin/adminCreate' , ['active' => 'create'] , 'admin/layouts/main') ; 
+        return Viewer::render('admin/posts/create' , ['active' => 'create'] , 'admin/layouts/main') ; 
     }
     
     public function store() {}
