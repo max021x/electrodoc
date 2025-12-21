@@ -1,5 +1,0 @@
-<div>
-    all admin 
-</div>
-
-

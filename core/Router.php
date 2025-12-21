@@ -11,12 +11,12 @@ class Router
     protected array $globalMiddlewares = [];
     protected array $routeMiddlewares = [];
 
-    public function add(string $method, string $uri, string $controller , array $middlewares = []): void
+    public function add(string $method, string $uri, string $controller, array $middlewares = []): void
     {
         $this->routes[] = [
             'method' => $method,
             'uri' => $uri,
-            'controller' => $controller, 
+            'controller' => $controller,
             'middlewares' => $middlewares
         ];
     }
@@ -111,11 +111,18 @@ class Router
         exit;
     }
 
-    
+
     public static function unauthorized()
     {
         http_response_code(401);
         echo Viewer::render('errors/401', ['dnone' => true], 'layouts/main');
+        exit;
+    }
+
+    public static function forbidden()
+    {
+        http_response_code(403);
+        echo Viewer::render('errors/403', ['dnone' => true], 'layouts/main');
         exit;
     }
 

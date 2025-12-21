@@ -12,7 +12,7 @@ class Viewer
         static::$globals[$key] = $value ; 
     }
 
-    public static function render(string $template, array $data, string $layout = null): string
+    public static function render(string $template, array $data = [] , string $layout = null): string
     {      
         $data = [...static::$globals , ...$data] ; 
         $content = static::renderTemplate($template, $data);

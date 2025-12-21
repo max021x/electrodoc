@@ -4,33 +4,18 @@ namespace App\Controllers\Admin;
 
 use Core\Viewer;
 
-
 class DashboardController
 {
 
     public function index()
     {
-        return Viewer::render('admin/dashboard', ['active' => 'dashboard'], 'admin/layouts/main');
+        Authorization::verify('dashboard');
+
+        // $totalPosts = Post::count();
+        // $totalComments = Comment::count();
+        // $recentPosts = Post::getRecent(5);
+        // $recentComments = Comment::getRecent(5);
+        
+        return Viewer::render('admin/dashboard/index' , [] , 'layout/main.php');
     }
-    // show all posts
-    public function posts()
-    {
-        // select * posts  ; 
-        return Viewer::render('admin/adminPosts', ['active' => 'posts'], 'admin/layouts/main');
-    }
-    // create post from
-    public function create() {
-        // show from here
-        return Viewer::render('admin/adminCreate' , ['active' => 'create'] , 'admin/layouts/main') ; 
-    }
-    // store post
-    public function store() {}
-    // show specific post
-    public function show($id) {}
-    // shoe post to edit 
-    public function edit($id) {}
-    // update post
-    public function update($id) {}
-    // delete post
-    public function delete($id) {}
 }

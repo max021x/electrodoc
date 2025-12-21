@@ -9,7 +9,7 @@ use App\Middlewares\ViewMiddleware ;
 $router->addGlobalMiddleware(ViewMiddleware::class) ; 
 $router->addRouteMiddleware('auth' , AuthMiddleware::class) ; 
 
-// routes
+// home
 $router->add('GET',  '/', 'HomeController@index');
 
 // auth routes 
@@ -23,12 +23,12 @@ $router->add("GET", '/register', 'RegisterController@index');
 
 // admin routes 
 $router->add("GET", '/admin/dashboard', 'Admin\DashboardController@index');
-$router->add("GET", '/admin/posts', 'Admin\DashboardController@posts');
-$router->add("GET", '/admin/posts/create', 'Admin\DashboardController@create');
-// $router->add("POST", '/admin/posts/store' , 'Admin\DashboardController@store');
-// $router->add("GET", '/admin/{post}/edit' , 'Admin\DashboardController@edit');
-// $router->add("POST", '/admin/{post}/update' , 'Admin\DashboardController@update');
-// $router->add("POST", '/admin/{post}/delete' , 'Admin\DashboardController@delete');
+$router->add("GET", '/admin/posts', 'Admin\PostController@index');
+$router->add("GET", '/admin/posts/create', 'Admin\PostController@create');
+$router->add("POST", '/admin/posts/store' , 'Admin\PostController@store');
+$router->add("GET", '/admin/{id}/edit' , 'Admin\PostController@edit');
+$router->add("POST", '/admin/{id}' , 'Admin\PostController@update');
+$router->add("POST", '/admin/{id}/delete' , 'Admin\PostController@delete');
 
 
 // user 
