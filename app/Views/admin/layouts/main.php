@@ -59,22 +59,6 @@
                         </a>
                     </li>
                 </ul>
-
-                <div class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill text-light" viewBox="0 0 16 16">
-                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 ms-2">
-                            <p class="mb-0 text-light small">Admin User</p>
-                            <a href="/" class="text-decoration-none small text-info">View Website →</a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Main Content -->
@@ -82,6 +66,22 @@
                 <?= $content ?>
             </div>
 
+
+            <footer class="bottom-fixed start-0 p-3 w-100 bg-dark">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill text-light" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 ms-2">
+                        <p class="mb-0 text-light small">Admin User</p>
+                        <a href="/" class="text-decoration-none small text-info">View Website →</a>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
     <script src="/js/bootstrap.bundle.min.js"></script>
