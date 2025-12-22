@@ -32,104 +32,41 @@
                 <tr>
                     <th width="50">ID</th>
                     <th>Title</th>
-                    <th width="120">Status</th>
-                    <th width="150">Created Date</th>
+                    <th width="120">Created Date</th>
                     <th width="150">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Sample data - replace with dynamic content -->
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <div class="fw-semibold">Getting Started with PHP</div>
-                        <small class="text-muted">PHP, Web Development</small>
-                    </td>
-                    <td><span class="badge bg-success">Published</span></td>
-                    <td>2024-01-15</td>
-                    <td>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <!-- Show Action - Magnet Icon -->
-                            <a href="/posts/1" class="btn btn-outline-info" title="View Post">
-                                <i class="fas fa-search"></i>
-                            </a>
-                            <!-- Edit Action - Pen Icon -->
-                            <a href="/admin/1/edit" class="btn btn-outline-primary" title="Edit Post">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                            <!-- Delete Action - Trash Bin Icon -->
-                            <a href="#" class="btn btn-outline-danger btn-delete" title="Delete Post">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>
-                        <div class="fw-semibold">Advanced Laravel Techniques</div>
-                        <small class="text-muted">Laravel, PHP</small>
-                    </td>
-                    <td><span class="badge bg-success">Published</span></td>
-                    <td>2024-01-14</td>
-                    <td>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a href="/posts/2" class="btn btn-outline-info" title="View Post">
-                                <i class="fas fa-search"></i>
-                            </a>
-                            <a href="/admin/2/edit" class="btn btn-outline-primary" title="Edit Post">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-outline-danger btn-delete" title="Delete Post">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>
-                        <div class="fw-semibold">Bootstrap 5 New Features</div>
-                        <small class="text-muted">Bootstrap, CSS</small>
-                    </td>
-                    <td><span class="badge bg-warning text-dark">Draft</span></td>
-                    <td>2024-01-13</td>
-                    <td>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a href="/posts/3" class="btn btn-outline-info" title="View Post">
-                                <i class="fas fa-search"></i>
-                            </a>
-                            <a href="/admin/3/edit" class="btn btn-outline-primary" title="Edit Post">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-outline-danger btn-delete" title="Delete Post">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>
-                        <div class="fw-semibold">JavaScript ES6+ Features</div>
-                        <small class="text-muted">JavaScript, Web Development</small>
-                    </td>
-                    <td><span class="badge bg-success">Published</span></td>
-                    <td>2024-01-12</td>
-                    <td>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a href="/posts/4" class="btn btn-outline-info" title="View Post">
-                                <i class="fas fa-search"></i>
-                            </a>
-                            <a href="/admin/4/edit" class="btn btn-outline-primary" title="Edit Post">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-outline-danger btn-delete" title="Delete Post">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
+                <?php foreach ($posts as $post): ?>
+                    <tr>
+                        <td><?= $post->id ?></td>
+                        <td>
+                            <div class="fw-semibold"><?= $post->title ?></div>
+                            <!-- <small class="text-muted">PHP, Web Development</small> -->
+                        </td>
+                        <!-- <td><span class="badge bg-success">Published</span></td> -->
+                        <td><?= $post->created_at ?></td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <!-- Show Action - Magnet Icon -->
+                                <a href="admin/posts/<?= $post->id ?>/show" class="btn btn-outline-info" title="View Post">
+                                    <i class="fas fa-search"></i>
+                                </a>
+                                <!-- Edit Action - Pen Icon -->
+                                <a href="/admin/posts/<?= $post->id?>/edit" class="btn btn-outline-primary" title="Edit Post">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                <!-- Delete Action - Trash Bin Icon -->
+                                <form class="btn-group" action="/admin/posts/<?= $post->id ?>/delete" method="POST">
+                                    <button href="#" class="btn btn-outline-danger btn-delete" title="Delete Post">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
             </tbody>
         </table>
     </div>

@@ -23,7 +23,11 @@ class PostController
     
     public function store() {}
 
-    public function show($id) {}
+    public function show($id) {
+        $post = Post::find($id) ; 
+        Authorization::verify('dashboard') ; 
+        return Viewer::render('admin/posts/show' , ['posts' => $post] , 'admin/layouts/main') ; 
+    }
 
     public function edit($id) {}
 

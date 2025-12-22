@@ -26,9 +26,10 @@ $router->add("GET", '/admin/dashboard', 'Admin\DashboardController@index');
 $router->add("GET", '/admin/posts', 'Admin\PostController@index');
 $router->add("GET", '/admin/posts/create', 'Admin\PostController@create');
 $router->add("POST", '/admin/posts/store' , 'Admin\PostController@store');
-$router->add("GET", '/admin/{id}/edit' , 'Admin\PostController@edit');
-$router->add("POST", '/admin/{id}' , 'Admin\PostController@update');
-$router->add("POST", '/admin/{id}/delete' , 'Admin\PostController@delete');
+$router->add("GET", '/admin/posts/{id}/show', 'Admin\PostController@index');
+$router->add("GET", '/admin/posts/{id}/edit' , 'Admin\PostController@edit');
+$router->add("POST", '/admin/posts/{id}/update' , 'Admin\PostController@update');
+$router->add("POST", '/admin/posts/{id}/delete' , 'Admin\PostController@delete');
 
 
 // user 
