@@ -3,9 +3,10 @@
 namespace App\Controllers\Admin;
 
 use App\Models\Post;
+use App\Services\Auth;
 use App\Services\Authorization;
 use Core\Viewer;
-use Core\Router ; 
+use Core\Router;
 
 
 class PostController
@@ -20,13 +21,27 @@ class PostController
 
     public function create()
     {
+        Authorization::verify('dashboard');
         return Viewer::render('admin/posts/create', ['active' => 'create'], 'admin/layouts/main');
     }
 
-    public function store() {}
+    public function store()
+    {
+        Authorization::verify('dashboard');
+        $data = [
+            'title' => $_POST['title'],
+            'content' => $_POST['content'],
+            'user_id' => Auth::user()->id
+        ];
+        Post::create(
+            $data
+        );
+        Router::redirect('/admin/posts') ; 
+    }
 
     public function show($id)
     {
+        Authorization::verify('dashboard');
         $post = Post::find($id);
         Authorization::verify('dashboard');
         return Viewer::render('admin/posts/show', ['post' => $post], 'admin/layouts/main');
@@ -49,12 +64,14 @@ class PostController
         Router::redirect('/admin/posts');
     }
 
-    public function delete($id) {
-        $post = Post::find($id)  ;
+    public function delete($id)
+    {   
+        $post = Post::find($id);
+        Authorization::verify('dashboard') ; 
         // if(!$post) {
-            // view with the error of undefined id
+        // view with the error of undefined id
         // }   
         $post->delete($id);
-        Router::redirect('/admin/posts') ; 
+        Router::redirect('/admin/posts');
     }
 }
