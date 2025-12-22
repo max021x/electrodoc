@@ -126,6 +126,12 @@ class Router
         exit;
     }
 
+    public static function pageExpired () {
+        http_response_code(419);
+        echo Viewer::render('errors/419', ['dnone' => true], 'layouts/main');
+        exit;
+    }
+
 
     public static function redirect(string $uri): void
     {

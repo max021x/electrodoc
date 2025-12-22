@@ -13,7 +13,7 @@
             "Core\\": "core/"
         },
         "files": [
-            "core/helpers.php"
+            "core/Helpers.php"
         ]
     },
     "require": {},

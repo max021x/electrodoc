@@ -1,13 +1,12 @@
 <?php
 
 use App\Middlewares\AuthMiddleware;
-use App\Services\Auth;
-
-use App\Middlewares\ViewMiddleware ; 
-
+use App\Middlewares\CsrfMiddleware;
+use App\Middlewares\ViewMiddleware ;
 
 $router->addGlobalMiddleware(ViewMiddleware::class) ; 
 $router->addRouteMiddleware('auth' , AuthMiddleware::class) ; 
+$router->addGlobalMiddleware(CsrfMiddleware::class) ; 
 
 // home
 $router->add('GET',  '/', 'HomeController@index');
