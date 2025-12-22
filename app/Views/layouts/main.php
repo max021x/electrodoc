@@ -50,15 +50,22 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/posts">Posts</a>
                         </li>
-                        <li class="nav-item">
-                            <?php if (isset($user)): ?>
+                        <?php if (isset($user)): ?>
+                            <li class="nav-item">
                                 <form action="/logout" method="POST">
                                     <button class="btn btn-danger" type="submit">Logout (<?= $user->email ?>)</button>
                                 </form>
-                            <?php else : ?>
+                            </li>
+                            <?php if (check('dashboard')): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/dashboard">Admin</a>
+                                </li>
+                            <?php endif ?>
+                        <?php else : ?>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/login">login</a>
-                            <?php endif ?> 
-                        </li>
+                            </li>
+                        <?php endif ?>
                         <li class="nav-item">
                             <a class="nav-link" href="/#contact">Contact</a>
                         </li>

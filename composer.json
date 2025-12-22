@@ -11,11 +11,14 @@
         "psr-4": {
             "App\\": "app/",
             "Core\\": "core/"
-        }
+        },
+        "files": [
+            "core/helpers.php"
+        ]
     },
-    "require": {} , 
+    "require": {},
     "scripts": {
-        "schema:load" : "php bin/schema_load.php",
-        "schema:fixture" : "php bin/schema_fixture.php"
+        "schema:load": "php bin/schema_load.php",
+        "schema:fixture": "php bin/schema_fixture.php"
     }
 }

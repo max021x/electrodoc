@@ -9,7 +9,6 @@ class Authorization {
 
     public static function verify (string $action , mixed $resource = null) {
         if(!static::check($action , $resource)) {
-            var_dump($action , $resource) ; 
             Router::forbidden() ; 
         }
     }
