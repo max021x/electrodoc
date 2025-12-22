@@ -28,11 +28,9 @@ class Model
         $db->query($sql, array_values($data));
     }
 
-    public static function  save()
+    public function save()
     {
-
         $db = App::get('database');
-
         $data = get_object_vars($this);
         if (!isset($this->id)) {
             unset($data['id']);
@@ -54,7 +52,7 @@ class Model
             return ; 
         }
         $db = App::get('database') ; 
-        $sql = "DELETE FROM " . static::$table . " WHERE id = ?" ; 
-        $db->quey($sql , [$this->id]); 
+        $sql = "DELETE FROM " . static::$table . " WHERE id = ? ;" ;
+        $db->query($sql , [$this->id]); 
     }
 }

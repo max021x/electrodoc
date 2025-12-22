@@ -50,7 +50,7 @@
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
                                 <!-- Show Action - Magnet Icon -->
-                                <a href="admin/posts/<?= $post->id ?>/show" class="btn btn-outline-info" title="View Post">
+                                <a href="/admin/posts/<?= $post->id ?>/show" class="btn btn-outline-info" title="View Post">
                                     <i class="fas fa-search"></i>
                                 </a>
                                 <!-- Edit Action - Pen Icon -->
