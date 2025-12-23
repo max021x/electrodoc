@@ -4,7 +4,7 @@
             <h1 class="h3 mb-0">Posts Management</h1>
             <p class="text-muted mb-0">Manage all your blog posts</p>
         </div>
-        <a href="/admin/posts/create" class="btn btn-primary">
+        <a href="/admin/posts/create" class="btn btn-primary btn-sm">
             <i class="fas fa-plus-circle"></i> New Post
         </a>
     </div>

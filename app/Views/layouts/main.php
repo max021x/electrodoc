@@ -79,11 +79,11 @@
                     <li class="nav-item mx-2">
                         <a class="nav-link text-dark" href="/#contact">Contact</a>
                     </li>
-                    <li class="nav-item mx-2">
+                    <!-- <li class="nav-item mx-2">
                         <a href="#" class="nav-link text-dark">
                             <i class="fas fa-moon"></i>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item mx-2">
                         <a href="#" class="nav-link text-dark">
                             <i class="fab fa-github"></i>

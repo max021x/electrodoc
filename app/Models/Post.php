@@ -26,4 +26,11 @@ class Post extends Model
             static::class
         )  ;
     }
+
+    public static function count () {
+        $db = App::get('database') ; 
+        $sql = "SELECT count(*) FROM " . static::$table ; 
+        return (int) $db->query($sql,[])->fetchColumn() ; 
+    }
+
 }

@@ -3,7 +3,12 @@
 namespace App\Controllers\Admin;
 
 use Core\Viewer;
-use App\Services\Authorization ; 
+use App\Services\Authorization;
+use App\Models\Post;
+use App\Models\Comment;
+use App\Models\Contact;
+use App\Models\User;
+
 class DashboardController
 {
 
@@ -11,11 +16,17 @@ class DashboardController
     {
         Authorization::verify('dashboard');
 
-        // $totalPosts = Post::count();
-        // $totalComments = Comment::count();
-        // $recentPosts = Post::getRecent(5);
-        // $recentComments = Comment::getRecent(5);
+        $totalPosts = Post::count();
+        $totalComments = Comment::count();
+        $totalContacts = Contact::count();
+        $totalUsers = User::count();
         
-        return Viewer::render('admin/dashboard/index' , ['active' => 'dashboard'] , 'admin/layouts/main');
+        return Viewer::render('admin/dashboard/index', [
+            'active' => 'dashboard',
+            'totalPosts' => $totalPosts,
+            'totalComments' => $totalComments , 
+            'totalContacts' => $totalContacts , 
+            'totalUsers' => $totalUsers
+        ], 'admin/layouts/main');
     }
 }

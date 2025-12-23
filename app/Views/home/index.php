@@ -22,12 +22,8 @@
 
                             <!-- Form -->
                             <div class="form-container text-center">
-                                <form action="" class="">
-                                    <div class="my-4">
-                                        <input placeholder="Email Address" type="text" class="form-control form-control-lg rounded-5 ">
-                                    </div>
                                     <div class="d-grid">
-                                        <button class="btn btn-primary btn-lg text-white">Get Started</button>
+                                        <a class="btn btn-primary btn-lg text-white">Login</a>
                                     </div>
                                 </form>
                             </div>
