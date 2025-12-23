@@ -144,7 +144,7 @@
                                                 <div class="flex-grow-1">
                                                     <div class="d-flex justify-content-between align-items-start mb-2">
                                                         <div>
-                                                            <h6 class="mb-0 fs-6">Anonymous User</h6>
+                                                            <h6 class="mb-0 fs-6"><?=$comment->user_id?></h6>
                                                             <small class="text-muted fs-6">
                                                                 <i class="fas fa-clock me-1"></i>
                                                                 <?= date('M j, Y \a\t g:i A', strtotime($comment->created_at)) ?>

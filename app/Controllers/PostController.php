@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers ;
+namespace App\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
@@ -8,25 +8,33 @@ use App\Models\User;
 use Core\Router;
 use Core\Viewer;
 
-class PostController {
+class PostController
+{
 
-    public function index () {
-        $posts = Post::getRecent(3)  ;
-        return Viewer::render('posts/index' , ['posts' => $posts] , 'layouts/main') ; 
+    public function index()
+    {
+        $posts = Post::getRecent(3);
+        return Viewer::render('posts/index', ['posts' => $posts], 'layouts/main');
     }
 
-    public function show ($id) {
-        
-        $post = Post::find($id) ; 
-        $username = User::find($post->user_id)->name; 
+    public function show($id)
+    {
+
+        $post = Post::find($id);
+        $username = User::find($post->user_id)->name;
         // var_dump($username) ; die ; 
-        if(!$post) {
-            Router::notFound() ; 
+        if (!$post) {
+            Router::notFound();
         }
 
-        // $comments 
-        $comments = Comment::forPost($id) ;
-        return Viewer::render('posts/show' , ['post' => $post , 'author_name' => $username , 'comments' => $comments] , 'layouts/main') ; 
-    }
+        $comments = Comment::forPost($id);
 
+        // username for each comments
+        foreach ($comments as $comment) {
+            $name = User::find($comment->user_id)->name;
+            $comment->user_id = $name ; 
+        }
+        
+        return Viewer::render('posts/show', ['post' => $post, 'author_name' => $username, 'comments' => $comments], 'layouts/main');
+    }
 }
