@@ -1,146 +1,183 @@
-<div class="container py-4 my-7">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
+        <div class="col-12 col-lg-10 col-xl-9">
 
-            <!-- Title Card -->
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-body p-4">
-                    <h1 class="card-title mb-3"><?= htmlspecialchars($post->title) ?></h1>
-
-                    <!-- Meta Information -->
-                    <div class="d-flex flex-wrap gap-3 text-muted mb-0">
-                        <?php if (isset($post->created_at)): ?>
-                            <div>
-                                <i class="fas fa-calendar-alt me-1"></i>
-                                <?= date('M j, Y', strtotime($post->created_at)) ?>
-                            </div>
-                        <?php endif; ?>
-
-                        <div>
-                            <i class="fas fa-eye me-1"></i>
-                            <?= number_format($post->views) ?> views
-                        </div>
-
-                        <?php if (isset($post->category_name)): ?>
-                            <div>
-                                <span class="badge bg-secondary">
-                                    <?= htmlspecialchars($post->category_name) ?>
-                                </span>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
+            <!-- Back Navigation -->
+            <div class="mb-4">
+                <a href="/posts" class="btn btn-outline-secondary btn-sm px-3 py-2">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Posts
+                </a>
             </div>
 
-            <!-- Featured Image Card -->
-            <?php if (isset($post->image_url) && $post->image_url): ?>
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body p-0">
-                        <img src="/images/electronic-car-2.jpg"
-                            alt="<?= htmlspecialchars($post->title) ?>"
-                            class="img-fluid rounded-top w-100">
+            <!-- Main Post Content Card -->
+            <div class="card shadow-lg mb-5">
+                <!-- Post Header -->
+                <div class="card-header bg-white border-bottom py-4 px-4 px-md-5">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                        <?php if (isset($post->category_name)): ?>
+                            <span class="badge bg-primary px-3 py-2 mb-2">
+                                <i class="fas fa-tag me-1"></i>
+                                <?= htmlspecialchars($post->category_name) ?>
+                            </span>
+                        <?php endif; ?>
+                        
+                        <div class="text-muted d-flex align-items-center gap-3">
+                            <?php if (isset($post->created_at)): ?>
+                                <span class="d-flex align-items-center fs-6 fs-md-base">
+                                    <i class="fas fa-calendar-alt me-2"></i>
+                                    <?= date('F j, Y', strtotime($post->created_at)) ?>
+                                </span>
+                            <?php endif; ?>
+                            <span class="d-flex align-items-center fs-6 fs-md-base">
+                                <i class="fas fa-eye me-2"></i>
+                                <?= number_format($post->views) ?> views
+                            </span>
+                        </div>
                     </div>
+                    
+                    <h1 class="display-6 fw-bold mb-0 fs-3 fs-md-2 fs-lg-1"><?= htmlspecialchars($post->title) ?></h1>
                 </div>
-            <?php endif; ?>
 
-            <!-- Content Card -->
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-body p-4">
-                    <div class="lead">
+                <!-- Featured Image -->
+                <?php if (isset($post->image_url) && $post->image_url): ?>
+                    <div class="p-4 p-md-5">
+                        <img src="<?= htmlspecialchars($post->image_url) ?>"
+                            alt="<?= htmlspecialchars($post->title) ?>"
+                            class="img-fluid rounded w-100 shadow"
+                            style="max-height: 500px; object-fit: cover;">
+                        <div class="text-center mt-3 text-muted">
+                            <small class="fs-6"><i class="fas fa-image me-1"></i>Featured image</small>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Post Content -->
+                <div class="card-body px-4 px-md-5 py-4 py-md-5">
+                    <div class="post-content fs-6 fs-md-5 lh-lg">
                         <?= nl2br(htmlspecialchars($post->content)) ?>
                     </div>
                 </div>
-            </div>
 
-            <!-- Optional: Author Card -->
-            <?php if (isset($author_name)): ?>
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="me-3">
-                                <i class="fas fa-user-circle fa-2x"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Author</h6>
-                                <p class="mb-0 text-muted"><?= htmlspecialchars($author_name) ?></p>
-                            </div>
+                <!-- Post Footer Actions -->
+                <div class="card-footer bg-light py-4 px-4 px-md-5">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary btn-sm px-3 fs-6">
+                                <i class="fas fa-thumbs-up me-1"></i> Like
+                            </button>
+                            <button class="btn btn-outline-success btn-sm px-3 fs-6">
+                                <i class="fas fa-share-alt me-1"></i> Share
+                            </button>
+                            <button class="btn btn-outline-info btn-sm px-3 fs-6">
+                                <i class="fas fa-bookmark me-1"></i> Save
+                            </button>
                         </div>
+                        
+                        <!-- Author Info -->
+                        <?php if (isset($author_name)): ?>
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fas fa-user-circle fa-2x fa-lg fa-md-2x text-secondary"></i>
+                                </div>
+                                <div class="fs-6 fs-md-base">
+                                    <small class="text-muted d-block">Written by</small>
+                                    <strong><?= htmlspecialchars($author_name) ?></strong>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-            <?php endif; ?>
+            </div>
 
             <!-- Comment Section -->
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-body p-4">
-                    <h5 class="card-title mb-4">Comments (<?= count($comments) ?>)</h5>
+            <div class="card shadow-lg mb-4">
+                <div class="card-header bg-white py-4 px-4 px-md-5">
+                    <h3 class="mb-0 d-flex align-items-center fs-4 fs-md-3">
+                        <i class="fas fa-comments me-3 text-primary"></i>
+                        Comments
+                        <span class="badge bg-primary ms-3 px-3 py-2 fs-6"><?= count($comments) ?></span>
+                    </h3>
+                </div>
+
+                <!-- Comment Form -->
+                <div class="card-body px-4 px-md-5 py-4 py-md-5">
+                    <h5 class="mb-4 fs-5 fs-md-4">Add your comment</h5>
+                    <form action="/posts/<?= $post->id ?>/comments" method="POST">
+                        <?= csrf_token() ?>
+                        <div class="mb-4">
+                            <textarea class="form-control p-3 fs-6" 
+                                      id="commentContent" 
+                                      name="content" 
+                                      rows="4" 
+                                      placeholder="Share your thoughts about this post..." 
+                                      required></textarea>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary px-4 py-2 fs-6">
+                                <i class="fas fa-paper-plane me-2"></i>Post Comment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Comments List -->
+                <div class="px-4 px-md-5 pb-4 pb-md-5">
+                    <h5 class="mb-4 border-bottom pb-3 fs-5 fs-md-4">Recent Comments</h5>
                     
-                    <!-- Comment Form -->
-                    <div class="mb-5">
-                        <form action="/posts/<?= $post->id ?>/comments" method="POST">
-                            <?=csrf_token() ?>
-                            <div class="mb-3">
-                                <label for="commentContent" class="form-label fw-semibold">Leave a Comment</label>
-                                <textarea class="form-control" id="commentContent" name="content" rows="4" 
-                                          placeholder="Write your comment here..." required></textarea>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary px-4">
-                                    <i class="fas fa-paper-plane me-2"></i>Submit Comment
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Comments List -->
-                    <div class="mt-4">
-                        <h6 class="border-bottom pb-2 mb-4">Recent Comments</h6>
-                        
-                        <?php if (empty($comments)): ?>
-                            <div class="text-center py-4 text-muted">
-                                <i class="fas fa-comment-slash fa-2x mb-3"></i>
-                                <p class="mb-0">No comments yet. Be the first to comment!</p>
-                            </div>
-                        <?php else: ?>
-                            <div class="row g-3" id="comments">
-                                <?php foreach($comments as $comment): ?>
-                                    <div class="col-12">
-                                        <div class="card border-light shadow-sm">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="me-3">
-                                                            <i class="fas fa-user-circle fa-lg text-secondary"></i>
-                                                        </div>
+                    <?php if (empty($comments)): ?>
+                        <div class="text-center py-5">
+                            <i class="fas fa-comment-slash fa-3x fa-2x fa-md-3x text-muted mb-3"></i>
+                            <p class="text-muted mb-0 fs-6">No comments yet. Be the first to comment!</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="row g-4">
+                            <?php foreach($comments as $comment): ?>
+                                <div class="col-12">
+                                    <div class="card border-light shadow-sm">
+                                        <div class="card-body p-4">
+                                            <div class="d-flex align-items-start mb-3">
+                                                <div class="me-3">
+                                                    <div class="bg-light rounded-circle p-2">
+                                                        <i class="fas fa-user-circle fa-lg fa-md-lg text-secondary"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <div class="d-flex justify-content-between align-items-start mb-2">
                                                         <div>
-                                                            <h6 class="mb-0">Anonymous User</h6>
-                                                            <small class="text-muted">
+                                                            <h6 class="mb-0 fs-6">Anonymous User</h6>
+                                                            <small class="text-muted fs-6">
                                                                 <i class="fas fa-clock me-1"></i>
                                                                 <?= date('M j, Y \a\t g:i A', strtotime($comment->created_at)) ?>
                                                             </small>
                                                         </div>
                                                     </div>
+                                                    <p class="mb-0 fs-6">
+                                                        <?= nl2br(htmlspecialchars($comment->content)) ?>
+                                                    </p>
                                                 </div>
-                                                <p class="card-text mt-3 mb-0">
-                                                    <?= nl2br(htmlspecialchars($comment->content)) ?>
-                                                </p>
                                             </div>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
-            <!-- Navigation Card -->
-            <div class="card border-0 shadow-sm">
-                <div class="card-body p-3">
-                    <div class="d-flex justify-content-between">
-                        <a href="/posts" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-2"></i>Back to Posts
-                        </a>
-                    </div>
+            <!-- Related Actions -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center mt-4">
+                <a href="/posts" class="btn btn-outline-secondary px-4 py-2 mb-2 fs-6">
+                    <i class="fas fa-list me-2"></i>View All Posts
+                </a>
+                
+                <div class="d-flex gap-2 mb-2">
+                    <button class="btn btn-outline-dark px-3 py-2 fs-6">
+                        <i class="fas fa-print me-1"></i> Print
+                    </button>
+                    <button class="btn btn-outline-dark px-3 py-2 fs-6">
+                        <i class="fas fa-envelope me-1"></i> Email
+                    </button>
                 </div>
             </div>
 
