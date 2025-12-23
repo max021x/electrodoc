@@ -14,6 +14,7 @@
     <div class="card-body">
         <form id="createPostForm" action="/admin/posts/store" method="POST" enctype="multipart/form-data">
             <!-- Title Field -->
+             <?=csrf_token() ?>
             <div class="mb-3">
                 <label for="postTitle" class="form-label fw-semibold">Post Title *</label>
                 <input type="text" class="form-control" id="postTitle" name="title"

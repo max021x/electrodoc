@@ -53,6 +53,7 @@
                         <?php if (isset($user)): ?>
                             <li class="nav-item">
                                 <form action="/logout" method="POST">
+                                    <?=csrf_token() ?>
                                     <button class="btn btn-danger" type="submit">Logout (<?= $user->email ?>)</button>
                                 </form>
                             </li>
@@ -78,6 +79,7 @@
                         <li class="nav-item d-md-none">
                             <hr>
                             <form action="">
+                                <?=csrf_token() ?>
                                 <div class="btn-group d-flex justify-content-center">
                                     <input type="text" placeholder="Search" class="form-control">
                                     <button class="btn btn-primary"><i class="fas fa-search"></i></button>

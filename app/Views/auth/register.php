@@ -6,6 +6,7 @@
     <div class="card py-5 px-3" style="width: 500px;">
         <div class="card-body">
             <form>
+                <?=csrf_token() ?>
                 <div class="mb-3">
                     <label for="name" class="form-label">User name</label>
                     <input type="name" class="form-control" name="name" id="name">

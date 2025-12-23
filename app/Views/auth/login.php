@@ -15,6 +15,7 @@
     <div class="card py-5 px-3" style="width: 500px;">
         <div class="card-body">
             <form action="/login" method="POST">
+                <?=csrf_token() ?>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">

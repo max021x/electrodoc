@@ -4,6 +4,7 @@
     </div>
     <div class="card-body">
         <form action="/admin/posts/<?= $post->id  ?>/update" method="POST">
+            <?=csrf_token() ?>
             <div>
                 <label for="title">Title</label>
                 <input class="card-title form-control" name="title" value="<?= $post->title ?>"></input>

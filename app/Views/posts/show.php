@@ -77,6 +77,7 @@
                     <!-- Comment Form -->
                     <div class="mb-5">
                         <form action="/posts/<?= $post->id ?>/comments" method="POST">
+                            <?=csrf_token() ?>
                             <div class="mb-3">
                                 <label for="commentContent" class="form-label fw-semibold">Leave a Comment</label>
                                 <textarea class="form-control" id="commentContent" name="content" rows="4" 

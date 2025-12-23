@@ -59,6 +59,7 @@
                                 </a>
                                 <!-- Delete Action - Trash Bin Icon -->
                                 <form class="btn-group" action="/admin/posts/<?= $post->id ?>/delete" method="POST">
+                                    <?=csrf_token() ?>
                                     <button href="#" class="btn btn-outline-danger btn-delete" title="Delete Post">
                                         <i class="fas fa-trash"></i>
                                     </button>

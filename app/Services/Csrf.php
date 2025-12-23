@@ -23,9 +23,8 @@ class Csrf
         if (in_array($method, ['GET', 'HEAD', 'OPTIONS'])) {
             return true;
         }
-
         $csrfToken = $token ?? $_POST[static::TOKEN_NAME] ?? '';
-        if (!empty($csrfToken) && !static::isTokenExpired() && hash_equals($_SESSION['csrf_toke']['token'] ?? '', $csrfToken)) {
+        if (!empty($csrfToken) && !static::isTokenExpired() && hash_equals($_SESSION['csrf_token']['token'] ?? '', $csrfToken)) {
             static::generateToken();
             return true;
         }
