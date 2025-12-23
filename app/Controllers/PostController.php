@@ -30,11 +30,11 @@ class PostController
         $comments = Comment::forPost($id);
 
         // username for each comments
-        foreach ($comments as $comment) {
-            $name = User::find($comment->user_id)->name;
-            $comment->user_id = $name ; 
-        }
-        
+        // foreach ($comments as $comment) {
+        //     $name = User::find($comment->user_id)->name;
+        //     $comment->user_id = $name ; 
+        // }
+
         return Viewer::render('posts/show', ['post' => $post, 'author_name' => $username, 'comments' => $comments], 'layouts/main');
     }
 }

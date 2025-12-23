@@ -14,11 +14,15 @@ class Comment extends Model
     public $user_id;
     public $created_at;
     public $updated_at;
+    public $name ; 
 
     public static function forPost($id)
     {
         $db = App::get('database');
-        $sql = "SELECT * FROM " . static::$table .  " WHERE post_id = ?";
+        $sql = "SELECT comments.* , users.name FROM " . static::$table .  
+        " INNER JOIN users ON comments.user_id = users.id " . 
+        " WHERE comments.post_id = ?" .  
+        " ORDER BY comments.created_at ASC";
         return $db->fetchAll($sql, [$id] , static::class);
     }
 }
