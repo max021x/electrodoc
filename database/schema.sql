@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS posts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     content TEXT NOT NULL,
+    image VARCHAR(255) NULL , 
     views INTEGER DEFAULT 0,
     category_id INT,
     user_id INT NOT NULL,

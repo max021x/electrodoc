@@ -39,15 +39,12 @@
                 </div>
 
                 <!-- Featured Image -->
-                <?php if (isset($post->image_url) && $post->image_url): ?>
+                <?php if (isset($post->image) && $post->image): ?>
                     <div class="p-4 p-md-5">
-                        <img src="<?= htmlspecialchars($post->image_url) ?>"
+                        <img src="/uploads/posts/<?= isset($post->image) ? $post->image : ''?>"
                             alt="<?= htmlspecialchars($post->title) ?>"
                             class="img-fluid rounded w-100 shadow"
                             style="max-height: 500px; object-fit: cover;">
-                        <div class="text-center mt-3 text-muted">
-                            <small class="fs-6"><i class="fas fa-image me-1"></i>Featured image</small>
-                        </div>
                     </div>
                 <?php endif; ?>
 

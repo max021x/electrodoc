@@ -51,9 +51,9 @@ $posts = [
     ['user_id' => 3, 'category_id' => 3, 'title' => 'Web Development Best Practices', 'content' => 'In this post, we\'ll discuss some web development best practices...'],
 ];
 
-foreach ($posts as $post) {
-    Post::create($post);
-}
+// foreach ($posts as $post) {
+//     Post::create($post);
+// }
 
 // Comments
 $comments = [
@@ -63,8 +63,8 @@ $comments = [
     ['post_id' => 3, 'user_id' => 2, 'content' => 'I\'ve been using these practices and they really help.'],
 ];
 
-foreach ($comments as $comment) {
-    Comment::create($comment);
-}
+// foreach ($comments as $comment) {
+//     Comment::create($comment);
+// }
 
 echo "Fixtures loaded successfully.\n";

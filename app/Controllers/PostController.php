@@ -29,20 +29,13 @@ class PostController
     {
 
         $post = Post::find($id);
-        $username = User::find($post->user_id)->name;
-        // var_dump($username) ; die ; 
+        
         if (!$post) {
             Router::notFound();
         }
 
+        $username = User::find($post->user_id)->name;
         $comments = Comment::forPost($id);
-
-        // username for each comments
-        // foreach ($comments as $comment) {
-        //     $name = User::find($comment->user_id)->name;
-        //     $comment->user_id = $name ; 
-        // }
-
         return Viewer::render('posts/show', ['post' => $post, 'author_name' => $username, 'comments' => $comments], 'layouts/main');
     }
 }

@@ -18,11 +18,6 @@
                 <span class="input-group-text"><i class="fas fa-search"></i></span>
                 <input type="text" class="form-control form-control-sm" placeholder="Search posts...">
             </div>
-            <select class="form-select form-select-sm" style="width: 150px;">
-                <option>All Status</option>
-                <option>Published</option>
-                <option>Draft</option>
-            </select>
         </div>
     </div>
 

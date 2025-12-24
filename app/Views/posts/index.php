@@ -1,9 +1,9 @@
-<div class="container my-8">
+<div class="container my-5">
     <div class="row">
         <?php foreach ($posts as $post): ?>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card h-100">
-                    <img src="images/electronic-car-1.jpg" class="card-img-top" alt="...">
+                    <img src="/uploads/posts/<?= isset($post->image) ? $post->image : ''?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($post->title) ?></h5>
                         <p class="card-text"><?= htmlspecialchars(substr($post->content, 0, 150)) ?>...</p>

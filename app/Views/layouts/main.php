@@ -43,24 +43,27 @@
                     </li>
                     <?php if (isset($user)): ?>
                         <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" role="button" 
-                               data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-circle fa-lg me-2"></i>
                                 Account
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
                                 <li>
-                                    <a class="dropdown-item text-danger d-flex align-items-center" href="#">
-                                        <i class="fas fa-power-off me-2"></i>
-                                        <form action="/logout" method="POST" class="d-inline">
-                                            <?= csrf_token() ?>
-                                            <button class="btn btn-link text-danger p-0 border-0 text-decoration-none" 
-                                                    type="submit">Logout</button>
-                                        </form>
-                                    </a>
+                                    <form action="/logout" method="POST" class="d-inline">
+                                        <?= csrf_token() ?>
+                                        <div class="d-grid">
+                                            <button class="btn btn-link text-danger p-0 border-0 text-decoration-none"
+                                            type="submit">Logout
+                                            <i class="fas fa-power-off me-2"></i>
+                                        </button>
+                                        </div>
+                                    </form>
                                 </li>
                                 <?php if (check('dashboard')): ?>
-                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                     <li>
                                         <a class="dropdown-item d-flex align-items-center" href="/admin/dashboard">
                                             <i class="fas fa-cog me-2"></i>Admin Dashboard
@@ -96,8 +99,8 @@
             <div class="d-flex align-items-center d-lg-none">
                 <?php if (isset($user)): ?>
                     <div class="dropdown me-3">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" role="button" 
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-circle fa-lg"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
@@ -106,13 +109,15 @@
                                     <i class="fas fa-power-off me-2"></i>
                                     <form action="/logout" method="POST" class="d-inline">
                                         <?= csrf_token() ?>
-                                        <button class="btn btn-link text-danger p-0 border-0 text-decoration-none" 
-                                                type="submit">Logout</button>
+                                        <button class="btn btn-link text-danger p-0 border-0 text-decoration-none"
+                                            type="submit">Logout</button>
                                     </form>
                                 </a>
                             </li>
                             <?php if (check('dashboard')): ?>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center" href="/admin/dashboard">
                                         <i class="fas fa-cog me-2"></i>Admin
@@ -172,7 +177,7 @@
                         <i class="fab fa-github me-3"></i>GitHub
                     </a>
                 </li>
-                
+
                 <!-- Mobile Search -->
                 <li class="nav-item mt-4">
                     <hr>
@@ -201,7 +206,7 @@
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5 class="fw-bold mb-3">About ElectroShop</h5>
                     <p class="text-muted">
-                        Your one-stop destination for all electronic needs. We offer quality products 
+                        Your one-stop destination for all electronic needs. We offer quality products
                         with the best prices and customer service in the industry.
                     </p>
                 </div>

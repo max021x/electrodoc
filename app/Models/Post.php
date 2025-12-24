@@ -11,6 +11,7 @@ class Post extends Model
     public $id;
     public $title;
     public $content;
+    public $image ; 
     public $views;
     public $category_id;
     public $user_id;

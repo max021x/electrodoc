@@ -22,8 +22,8 @@ class PostController
 
         return Viewer::render(
             'admin/posts/index',
-            [   
-                'active' => 'posts' , 
+            [
+                'active' => 'posts',
                 'posts' => $posts,
                 'currentPage' => $page,
                 'totalPages' => ceil($total / $limit)
@@ -40,16 +40,50 @@ class PostController
 
     public function store()
     {
+
         Authorization::verify('dashboard');
+
+        $fileName = "";
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+
+            $file = $_FILES['image'];
+            $fileType = $file['type'];
+
+            if (!in_array($fileType, ['image/png', 'image/jpeg'])) {
+                var_dump($fileType);
+                exit("Error File Type");
+            }
+
+            if ($file['size'] > 2 * 1024 * 1024) {
+                exit("Error File Size");
+            }
+
+            $uploadDir = __DIR__ . '/../../../public/uploads/posts/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $fileName = uniqid('post_', true) . '.' . $extension;
+            $destination = $uploadDir . $fileName;
+
+            if (!move_uploaded_file($file['tmp_name'], $destination)) {
+                exit("Error Did not Move");
+            }
+
+        }
+                
         $data = [
             'title' => $_POST['title'],
-            'content' => $_POST['content'],
+            'content' => $_POST['content'], 
+            'image' => $fileName , 
             'user_id' => Auth::user()->id
         ];
         Post::create(
             $data
         );
-        Router::redirect('/admin/posts');
+        Router::redirect('/admin/posts?page=1');
     }
 
     public function show($id)

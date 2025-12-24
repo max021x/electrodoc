@@ -23,7 +23,7 @@
             </div>
 
             <!-- Image Upload - Compact Version -->
-            <!-- <div class="mb-3">
+            <div class="mb-3">
                 <label class="form-label fw-semibold">Featured Image</label>
                 <div class="border rounded p-3 text-center bg-light">
                     <div id="imagePreview" class="d-none">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="form-text small">Recommended size: 1200×600px</div>
-            </div> -->
+            </div>
 
             <!-- Content Field - Smaller -->
             <div class="mb-3">
