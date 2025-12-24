@@ -18,19 +18,35 @@ class Post extends Model
     public $updated_at;
 
 
-    public static function getRecent(int $limit)
-    {       
-        $db = App::get('database') ; 
+    public static function getRecent(?int $limit = null, ?int $page = null)
+    {
+
+        $sql = "SELECT * FROM " . static::$table;
+        $params = [];
+
+        if ($limit !== null) {
+            $sql .= " LIMIT ?";
+            $params[] = $limit;
+        }
+
+        if ($page !== null && $limit !== null) {
+            $offset = ($page - 1) * $limit;
+            $sql .= " OFFSET ?";
+            $params[] = $offset;
+        }
+
+        $db = App::get('database');
         return $db->fetchAll(
-            "SELECT * FROM " . static::$table . " ORDER BY created_at LIMIT ? " , [$limit] , 
+            $sql,
+            $params,
             static::class
-        )  ;
+        );
     }
 
-    public static function count () {
-        $db = App::get('database') ; 
-        $sql = "SELECT count(*) FROM " . static::$table ; 
-        return (int) $db->query($sql,[])->fetchColumn() ; 
+    public static function count()
+    {
+        $db = App::get('database');
+        $sql = "SELECT count(*) FROM " . static::$table;
+        return (int) $db->query($sql, [])->fetchColumn();
     }
-
 }

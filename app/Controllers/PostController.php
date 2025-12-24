@@ -13,8 +13,16 @@ class PostController
 
     public function index()
     {
-        $posts = Post::getRecent(3);
-        return Viewer::render('posts/index', ['posts' => $posts], 'layouts/main');
+        $page = $_GET['page'];
+        $limit = 2;
+        $posts = Post::getRecent(limit: $limit, page: $page);
+        $total = Post::count();
+
+        return Viewer::render(
+            'posts/index',
+            ['posts' => $posts  , 'currentPage' => $page , 'totalPages' => $total],
+            'layouts/main'
+        );
     }
 
     public function show($id)
