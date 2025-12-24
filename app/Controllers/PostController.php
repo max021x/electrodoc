@@ -14,13 +14,13 @@ class PostController
     public function index()
     {
         $page = $_GET['page'];
-        $limit = 2;
+        $limit = 12;
         $posts = Post::getRecent(limit: $limit, page: $page);
         $total = Post::count();
 
         return Viewer::render(
             'posts/index',
-            ['posts' => $posts  , 'currentPage' => $page , 'totalPages' => $total],
+            ['posts' => $posts  , 'currentPage' => $page , 'totalPages' => ceil($total / $limit)],
             'layouts/main'
         );
     }
