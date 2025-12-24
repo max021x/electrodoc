@@ -15,8 +15,21 @@ class PostController
     public function index()
     {
         Authorization::verify('dashboard');
-        $posts = Post::all();
-        return Viewer::render('admin/posts/index', ['active' => 'posts', 'posts' => $posts], 'admin/layouts/main');
+        $page = $_GET['page'];
+        $limit = 12;
+        $posts = Post::getRecent(limit: $limit, page: $page);
+        $total = Post::count();
+
+        return Viewer::render(
+            'admin/posts/index',
+            [   
+                'active' => 'posts' , 
+                'posts' => $posts,
+                'currentPage' => $page,
+                'totalPages' => ceil($total / $limit)
+            ],
+            'admin/layouts/main'
+        );
     }
 
     public function create()
@@ -36,7 +49,7 @@ class PostController
         Post::create(
             $data
         );
-        Router::redirect('/admin/posts') ; 
+        Router::redirect('/admin/posts');
     }
 
     public function show($id)
@@ -65,9 +78,9 @@ class PostController
     }
 
     public function delete($id)
-    {   
+    {
         $post = Post::find($id);
-        Authorization::verify('dashboard') ; 
+        Authorization::verify('dashboard');
         // if(!$post) {
         // view with the error of undefined id
         // }   

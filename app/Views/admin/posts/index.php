@@ -54,12 +54,12 @@
                                     <i class="fas fa-search"></i>
                                 </a>
                                 <!-- Edit Action - Pen Icon -->
-                                <a href="/admin/posts/<?= $post->id?>/edit" class="btn btn-outline-primary" title="Edit Post">
+                                <a href="/admin/posts/<?= $post->id ?>/edit" class="btn btn-outline-primary" title="Edit Post">
                                     <i class="fas fa-pen"></i>
                                 </a>
                                 <!-- Delete Action - Trash Bin Icon -->
                                 <form class="btn-group" action="/admin/posts/<?= $post->id ?>/delete" method="POST">
-                                    <?=csrf_token() ?>
+                                    <?= csrf_token() ?>
                                     <button href="#" class="btn btn-outline-danger btn-delete" title="Delete Post">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -72,23 +72,84 @@
         </table>
     </div>
 
-    <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">
-                    <i class="fas fa-chevron-left"></i> Previous
-                </a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">
-                    Next <i class="fas fa-chevron-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
+    <!-- Bootstrap 5.3 Pagination -->
+    <?php
+    $queryParams = $_GET;
+    unset($queryParams['page']);
+
+    function buildQueryString(array $params, $page): string
+    {
+        $params['page'] = $page;
+        return htmlspecialchars(http_build_query($params));
+    }
+
+    // Smart range calculation (show current page ± 2 pages)
+    $range = 2;
+    $start = max(1, $currentPage - $range);
+    $end = min($totalPages, $currentPage + $range);
+    ?>
+
+    <?php if ($totalPages > 1): ?>
+        <nav aria-label="Posts pagination" class="mt-5">
+            <ul class="pagination justify-content-center">
+
+                <!-- Previous Page Link -->
+                <li class="page-item <?= $currentPage == 1 ? 'disabled' : '' ?>">
+                    <a class="page-link"
+                        href="?<?= buildQueryString($queryParams, $currentPage - 1) ?>"
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <!-- First Page (with ellipsis if needed) -->
+                <?php if ($start > 1): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?<?= buildQueryString($queryParams, 1) ?>">1</a>
+                    </li>
+                    <?php if ($start > 2): ?>
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    <?php endif; ?>
+                <?php endif; ?>
+
+                <!-- Page Range -->
+                <?php for ($i = $start; $i <= $end; $i++): ?>
+                    <li class="page-item <?= $i == $currentPage ? 'active' : '' ?>">
+                        <?php if ($i == $currentPage): ?>
+                            <span class="page-link" aria-current="page"><?= $i ?></span>
+                        <?php else: ?>
+                            <a class="page-link" href="?<?= buildQueryString($queryParams, $i) ?>"><?= $i ?></a>
+                        <?php endif; ?>
+                    </li>
+                <?php endfor; ?>
+
+                <!-- Last Page (with ellipsis if needed) -->
+                <?php if ($end < $totalPages): ?>
+                    <?php if ($end < $totalPages - 1): ?>
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    <?php endif; ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?<?= buildQueryString($queryParams, $totalPages) ?>"><?= $totalPages ?></a>
+                    </li>
+                <?php endif; ?>
+
+                <!-- Next Page Link -->
+                <li class="page-item <?= $currentPage == $totalPages ? 'disabled' : '' ?>">
+                    <a class="page-link"
+                        href="?<?= buildQueryString($queryParams, $currentPage + 1) ?>"
+                        aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    <?php endif; ?>
 </div>
 
 <script>
