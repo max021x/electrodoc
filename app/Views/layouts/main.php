@@ -24,14 +24,16 @@
 
             <!-- Search Box - Visible on medium and larger screens -->
             <div class="d-none d-lg-flex flex-grow-1 justify-content-center mx-4">
-                <div class="input-group" style="max-width: 500px;">
-                    <input type="text" class="form-control border-primary" placeholder="Search products..." aria-label="Search">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                <form action="/posts" method="GET">
+                    <input type="hidden" name="page" value="1">
+                    <div class="input-group" style="max-width: 500px;">
+                        <input type="text" name="search" class="form-control border-primary" placeholder="Search products...">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
-
             <!-- Desktop Navigation -->
             <div class="d-none d-lg-flex align-items-center ms-auto">
                 <ul class="navbar-nav align-items-center">
@@ -54,9 +56,9 @@
                                         <?= csrf_token() ?>
                                         <div class="d-grid">
                                             <button class="btn btn-link text-danger p-0 border-0 text-decoration-none"
-                                            type="submit">Logout
-                                            <i class="fas fa-power-off me-2"></i>
-                                        </button>
+                                                type="submit">Logout
+                                                <i class="fas fa-power-off me-2"></i>
+                                            </button>
                                         </div>
                                     </form>
                                 </li>

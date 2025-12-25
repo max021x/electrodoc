@@ -20,11 +20,18 @@ class Post extends Model
     public $updated_at;
 
 
-    public static function getRecent(?int $limit = null, ?int $page = null)
+    public static function getRecent(?int $limit = null, ?int $page = null, ?string $search = null)
     {
 
         $sql = "SELECT * FROM " . static::$table;
         $params = [];
+
+        if ($search !== null) {
+            $sql .= " WHERE title LIKE ? OR content LIKE ?";
+            $params = ["%$search%", "%$search%"];
+        }
+
+        $sql .= " ORDER BY created_at DESC" ; 
 
         if ($limit !== null) {
             $sql .= " LIMIT ?";
@@ -73,6 +80,5 @@ class Post extends Model
                 [$id]
             );
         }
-
     }
 }
