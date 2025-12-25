@@ -1,11 +1,30 @@
 <div>
+    <!-- Success/Error Alerts -->
+    <?php if (isset($success)): ?>
+        <div class="container mt-6">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                <?= htmlspecialchars($success) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($error)): ?>
+        <div class="container mt-6">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <?= htmlspecialchars($error) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <header class="header">
         <!-- hero -->
         <div class="hero pt-7">
             <div class="container-xl">
                 <div class="row">
-
                     <div class="col-md-6 my-auto">
                         <div class="image-container mb-5 px-4">
                             <img src="images/esp32.jpg" class="img-fluid rounded d-block w-100" alt="">
@@ -22,16 +41,14 @@
 
                             <!-- Form -->
                             <div class="form-container text-center">
-                                    <div class="d-grid">
-                                        <a class="btn btn-primary btn-lg text-white">Login</a>
-                                    </div>
-                                </form>
+                                <div class="d-grid">
+                                    <a class="btn btn-primary btn-lg text-white">Login</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <svg class="frame-decoration" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
             viewBox="0 0 1920 192.275">
@@ -89,35 +106,29 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="row mb-4">
-                        <div
-                            class="col-md-4 d-flex flex-column align-items-center text-center">
+                        <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-rocket fa-4x text-secondary mb-2"></i>
                             <p class="fs-5 fw-bold">Space Analysis & Planning</p>
                         </div>
-                        <div
-                            class="col-md-4 d-flex flex-column align-items-center text-center">
+                        <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-clock fa-4x text-secondary mb-2"></i>
                             <p class="fs-5 fw-bold">Design & Color Choosing</p>
                         </div>
-                        <div
-                            class="col-md-4 d-flex flex-column align-items-center text-center">
+                        <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-comments fa-4x text-secondary mb-2"></i>
                             <p class="fs-5 fw-bold">Materials & Delivery</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div
-                            class="col-md-4 d-flex flex-column align-items-center text-center">
+                        <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-tools fa-4x text-secondary mb-2"></i>
                             <p class="fs-5 fw-bold">Execute The Concept</p>
                         </div>
-                        <div
-                            class="col-md-4 d-flex flex-column align-items-center text-center">
+                        <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-chart-pie fa-4x text-secondary mb-2"></i>
                             <p class="fs-5 fw-bold">Create A Great Atmosphere</p>
                         </div>
-                        <div
-                            class="col-md-4 d-flex flex-column align-items-center text-center">
+                        <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-chart-bar fa-4x text-secondary mb-2"></i>
                             <p class="fs-5 fw-bold">Evaluation & Reporting</p>
                         </div>

@@ -111,7 +111,7 @@
         const fileInput = document.getElementById('imageFile');
         
         imagePreview.classList.add('d-none');
-        imageUploadArea.classList.remove('d-none');
+        imageUploadArea.classList.remove('d-none');;
         fileInput.value = '';
     }
 
