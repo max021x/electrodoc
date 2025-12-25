@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Core\App;
 use Core\Model;
+use App\Models\PostViews;
 
 class Post extends Model
 {
@@ -52,11 +53,26 @@ class Post extends Model
     }
 
     public static function incrementViews($id)
-    {   
+    {
         $db = App::get('database');
-        $db->query(
-            "UPDATE posts SET views = views + 1 WHERE id = ?",
-            [$id]
+        $ip = $_SERVER['REMOTE_ADDR'];
+
+        $storedIp  = $db->fetchAll(
+            "SELECT * FROM post_views" . " WHERE post_id = ? AND ip_address = ?",
+            [$id, $ip],
+            PostViews::class
         );
+
+        if (!$storedIp) {
+            PostViews::create(
+                ['post_id' => $id, 'ip_address' => $ip]
+            );
+
+            $db->query(
+                "UPDATE posts SET views = views + 1 WHERE id = ?",
+                [$id]
+            );
+        }
+
     }
 }

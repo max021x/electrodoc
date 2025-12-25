@@ -2,7 +2,7 @@
 
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Category;
+// use App\Models\Category;
 use App\Models\Comment;
 use Core\App;
 
@@ -12,12 +12,12 @@ $db = App::get('database');
 
 $db->query("DELETE FROM comments");
 $db->query("DELETE FROM posts");
-$db->query("DELETE FROM categories");
+// $db->query("DELETE FROM categories");
 $db->query("DELETE FROM users");
 
 // Reset auto-increment counters
 $db->query("ALTER TABLE users AUTO_INCREMENT = 1");
-$db->query("ALTER TABLE categories AUTO_INCREMENT = 1");
+// $db->query("ALTER TABLE categories AUTO_INCREMENT = 1");
 $db->query("ALTER TABLE posts AUTO_INCREMENT = 1");
 $db->query("ALTER TABLE comments AUTO_INCREMENT = 1");
 
@@ -40,9 +40,9 @@ $categories = [
     ['name' => 'Capacitor'],
 ];
 
-foreach ($categories as $category) {
-    Category::create($category);
-}
+// foreach ($categories as $category) {
+//     Category::create($category);
+// }
 
 // Posts (make sure user_id and category_id exist in their tables)
 $posts = [

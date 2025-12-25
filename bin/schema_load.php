@@ -11,7 +11,7 @@ $sql = file_get_contents($schemaFile);
 
 //down 
 try {
-    $tables = ['contactmessages', 'comments', 'posts', 'categories', 'users'];
+    $tables = ['contactmessages', 'comments', 'post_views', 'posts', 'users'];
     foreach ($tables as $table) {
         $db->query("DROP TABLE IF EXISTS $table");
     }
