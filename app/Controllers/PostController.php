@@ -20,7 +20,7 @@ class PostController
 
         return Viewer::render(
             'posts/index',
-            ['posts' => $posts  , 'currentPage' => $page , 'totalPages' => ceil($total / $limit)],
+            ['posts' => $posts, 'currentPage' => $page, 'totalPages' => ceil($total / $limit)],
             'layouts/main'
         );
     }
@@ -29,13 +29,20 @@ class PostController
     {
 
         $post = Post::find($id);
-        
+
         if (!$post) {
             Router::notFound();
         }
 
+        Post::incrementViews($id) ; 
+
         $username = User::find($post->user_id)->name;
         $comments = Comment::forPost($id);
-        return Viewer::render('posts/show', ['post' => $post, 'author_name' => $username, 'comments' => $comments], 'layouts/main');
+
+        return Viewer::render('posts/show', [
+            'post' => $post,
+            'author_name' => $username,
+            'comments' => $comments
+        ], 'layouts/main');
     }
 }

@@ -11,7 +11,7 @@ class Post extends Model
     public $id;
     public $title;
     public $content;
-    public $image ; 
+    public $image;
     public $views;
     public $category_id;
     public $user_id;
@@ -49,5 +49,14 @@ class Post extends Model
         $db = App::get('database');
         $sql = "SELECT count(*) FROM " . static::$table;
         return (int) $db->query($sql, [])->fetchColumn();
+    }
+
+    public static function incrementViews($id)
+    {   
+        $db = App::get('database');
+        $db->query(
+            "UPDATE posts SET views = views + 1 WHERE id = ?",
+            [$id]
+        );
     }
 }
