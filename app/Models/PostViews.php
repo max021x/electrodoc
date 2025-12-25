@@ -11,6 +11,6 @@ class PostViews extends Model {
     public $id ; 
     public $post_id ; 
     public $ip_address ; 
-    
+    public $created_at ; 
 
 }
