@@ -14,7 +14,7 @@ class ContactController
         $contacts  = Contact::all();
         return Viewer::render(
             'admin/contacts/index',
-            ['contacts' => $contacts],
+            ['contacts' => $contacts , 'active' => 'contacts'],
             'admin/layouts/main'
         );
     }

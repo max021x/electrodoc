@@ -23,38 +23,40 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a href="/admin/dashboard" class="nav-link" :class="active === 'dashboard' ? 'active' : '' ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer2" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
-                                <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923 1.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
-                            </svg>
+                            <i class="fas fa-tachometer-alt me-2"></i>
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/posts?page=1" class="nav-link" :class="active === 'posts' ? 'active' : ''">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-post" viewBox="0 0 16 16">
-                                <path d="M4 3.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-8z" />
-                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
-                            </svg>
+                            <i class="fas fa-newspaper me-2"></i>
                             All Posts
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/posts/create" class="nav-link" :class="active === 'create' ? 'active' : '' ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
-                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                            </svg>
+                            <i class="fas fa-plus-circle me-2"></i>
                             Create Post
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="/admin/contacts" class="nav-link" :class="active === 'create' ? 'active' : '' ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
-                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                            </svg>
+                        <a href="/admin/users" class="nav-link" :class="active === 'users' ? 'active' : ''">
+                            <i class="fas fa-users me-2"></i>
+                            Users
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/admin/users/create" class="nav-link" :class="active === 'create_user' ? 'active' : '' ">
+                            <i class="fas fa-user-plus me-2"></i>
+                            Create User
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/admin/contacts" class="nav-link" :class="active === 'contacts' ? 'active' : '' ">
+                            <i class="fas fa-envelope me-2"></i>
                             Contact Messages
                         </a>
                     </li>
@@ -62,7 +64,9 @@
                     <li class="nav-item my-3 mx-4 ">
                         <form action="/logout" method="POST">
                             <?= csrf_token() ?>
-                            <button class="btn btn-outline-danger">Logout <i class="fas fa-power-off me-2"></i></button>
+                            <button class="btn btn-outline-danger w-100">
+                                <i class="fas fa-power-off me-2"></i>Logout
+                            </button>
                         </form>
                     </li>
 
@@ -79,14 +83,14 @@
                 <div class="d-flex align-items-center">
                     <div class="flex-shrink-0">
                         <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill text-light" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                            </svg>
+                            <i class="fas fa-user-cog text-light"></i>
                         </div>
                     </div>
                     <div class="flex-grow-1 ms-2">
                         <p class="mb-0 text-light small">Admin User</p>
-                        <a href="/" class="text-decoration-none small text-info">View Website →</a>
+                        <a href="/" class="text-decoration-none small text-info">
+                            <i class="fas fa-external-link-alt me-1"></i>View Website
+                        </a>
                     </div>
                 </div>
             </footer>
