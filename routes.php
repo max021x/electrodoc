@@ -34,6 +34,8 @@ $router->add("POST", '/admin/posts/{id}/delete' , 'Admin\PostController@delete')
 
 // admin users 
 $router->add("GET" , '/admin/users' , 'Admin\UserController@index') ;  
+$router->add("GET" , '/admin/users/create' , 'Admin\UserController@create') ;  
+$router->add("POST" , '/admin/users/store' , 'Admin\UserController@store') ;  
 
 // admin contact
 $router->add('GET' , '/admin/contacts' , 'Admin\ContactController@index') ; 

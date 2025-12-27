@@ -15,6 +15,7 @@ class User extends Model
     public $email;
     public $password;
     public $role;
+    public $status; 
     public $created_at;
     public $update_at;
 
@@ -33,7 +34,7 @@ class User extends Model
     public static function count()
     {
         $db = App::get('database');
-        $sql = "SELECT count(*) FROM " . static::$table . " WHERE role = 'user' ";
+        $sql = "SELECT count(*) FROM " . static::$table ;
         return (int) $db->query($sql, [])->fetchColumn();
     }
 
