@@ -17,8 +17,6 @@ class User extends Model
     public $role;
     public $status; 
     public $created_at;
-    public $update_at;
-
 
     public static function findByEmail(string $email)
     {
