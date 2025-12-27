@@ -28,7 +28,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/posts?page=1" class="nav-link" :class="active === 'posts' ? 'active' : ''">
+                        <a href="/admin/posts" class="nav-link" :class="active === 'posts' ? 'active' : ''">
                             <i class="fas fa-newspaper me-2"></i>
                             All Posts
                         </a>

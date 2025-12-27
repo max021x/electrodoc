@@ -78,7 +78,7 @@
     <div class="card-footer bg-light">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex gap-2">
-                <a href="/admin/posts?page=1" class="btn btn-outline-secondary btn-sm">
+                <a href="/admin/posts" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-arrow-left me-1"></i> Back
                 </a>
                 <a href="/admin/posts/<?= $post->id ?>/edit" class="btn btn-primary btn-sm">

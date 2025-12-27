@@ -15,7 +15,7 @@ class PostController
     public function index()
     {
         Authorization::verify('dashboard');
-        $page = $_GET['page'];
+        $page = $_GET['page'] ?? 1;
         $limit = 12;
         $posts = Post::getRecent(limit: $limit, page: $page);
         $total = Post::count();
@@ -83,7 +83,7 @@ class PostController
         Post::create(
             $data
         );
-        Router::redirect('/admin/posts?page=1');
+        Router::redirect('/admin/posts');
     }
 
     public function show($id)

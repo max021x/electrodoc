@@ -40,6 +40,5 @@ $router->add("GET" , '/posts/{id}' , 'PostController@show') ;
 $router->add("POST" , '/contact' , 'ContactController@store') ;
 
 $router->add("POST" , '/posts/{id}/comments' , 'CommentController@store' , ['auth']) ; 
-// $router->add("GET" , '/category/{slug}');
-// $router->add("GET" , '/profile');
+$router->add("GET" , '/dashboard' , 'UserDashboardController@index' , ['auth']);
 

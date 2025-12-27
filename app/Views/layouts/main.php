@@ -41,7 +41,7 @@
                         <a class="nav-link text-dark" href="/">Home</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-dark" href="/posts?page=1">Posts</a>
+                        <a class="nav-link text-dark" href="/posts">Posts</a>
                     </li>
                     <?php if (isset($user)): ?>
                         <li class="nav-item dropdown mx-2">
@@ -61,6 +61,14 @@
                                             </button>
                                         </div>
                                     </form>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="/dashboard">
+                                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                                    </a>
                                 </li>
                                 <?php if (check('dashboard')): ?>
                                     <li>
@@ -107,13 +115,23 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
                             <li>
-                                <a class="dropdown-item text-danger d-flex align-items-center" href="#">
-                                    <i class="fas fa-power-off me-2"></i>
-                                    <form action="/logout" method="POST" class="d-inline">
-                                        <?= csrf_token() ?>
+                                <form action="/logout" method="POST" class="d-inline">
+                                    <?= csrf_token() ?>
+                                    <div class="d-grid">
                                         <button class="btn btn-link text-danger p-0 border-0 text-decoration-none"
-                                            type="submit">Logout</button>
-                                    </form>
+                                            type="submit">Logout
+                                            <i class="fas fa-power-off me-2"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="/dashboard">
+                                    <i class="fas fa-tachometer-alt me-2"></i>
+                                    Dashboard
                                 </a>
                             </li>
                             <?php if (check('dashboard')): ?>
@@ -183,10 +201,10 @@
                 <!-- Mobile Search -->
                 <li class="nav-item mt-4">
                     <hr>
-                    <form action="" class="mt-3">
+                    <form action="/posts" method="GET" class="mt-3">
                         <?= csrf_token() ?>
                         <div class="input-group">
-                            <input type="text" class="form-control border-primary" placeholder="Search...">
+                            <input type="text" name="search" id="search" class="form-control border-primary" placeholder="Search...">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
