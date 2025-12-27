@@ -23,6 +23,7 @@ $router->add("GET", '/register', 'RegisterController@index');
 // admin routes 
 $router->add("GET", '/admin/dashboard', 'Admin\DashboardController@index');
 
+// admin posts
 $router->add("GET", '/admin/posts', 'Admin\PostController@index');
 $router->add("GET", '/admin/posts/create', 'Admin\PostController@create');
 $router->add("POST", '/admin/posts/store' , 'Admin\PostController@store');
@@ -31,7 +32,9 @@ $router->add("GET", '/admin/posts/{id}/edit' , 'Admin\PostController@edit');
 $router->add("POST", '/admin/posts/{id}/update' , 'Admin\PostController@update');
 $router->add("POST", '/admin/posts/{id}/delete' , 'Admin\PostController@delete');
 
+// admin contact
 $router->add('GET' , '/admin/contacts' , 'Admin\ContactController@index') ; 
+$router->add('POST' , '/admin/contacts/{id}/delete' , 'Admin\ContactController@delete') ; 
 
 
 // user 

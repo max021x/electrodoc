@@ -11,10 +11,12 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h5 class="mb-0">All Contact Messages</h5>
         <div class="d-flex gap-2">
-            <div class="input-group input-group-sm" style="width: 200px;">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-                <input type="text" class="form-control form-control-sm" placeholder="Search messages...">
-            </div>
+            <form action="/admin/contacts" method="GET">
+                <div class="input-group input-group-sm" style="width: 200px;">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <input type="text" name="search" class="form-control form-control-sm" placeholder="Search messages...">
+                </div>
+            </form>
         </div>
     </div>
 
@@ -64,7 +66,7 @@
                                 </button>
 
                                 <!-- Delete Action -->
-                                <form action="/admin/contacts/<?= $contact->id ?>/delete" method="POST">
+                                <form class="btn-group" action="/admin/contacts/<?= $contact->id ?>/delete" method="POST">
                                     <?= csrf_token() ?>
                                     <button type="submit" class="btn btn-outline-danger"
                                         onclick="return confirm('Are you sure you want to delete this message?')"
@@ -119,6 +121,8 @@
             </tbody>
         </table>
     </div>
+    <!-- paginate -->
+    <?php require "../app/Views/_partials/pagination.php" ?>
 </div>
 
 <!-- Empty State -->
