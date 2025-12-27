@@ -36,4 +36,42 @@ class User extends Model
         $sql = "SELECT count(*) FROM " . static::$table . " WHERE role = 'user' ";
         return (int) $db->query($sql, [])->fetchColumn();
     }
+
+
+    public static function getRecent(?int $limit = null, ?int $page = null, ?string $search = null, ?string $role = null)
+    {
+
+        $sql = "SELECT * FROM " . static::$table;
+        $params = [];
+
+        if ($role !== null) {
+            $sql .= " WHERE role LIKE ?";
+            $params = ["%$role%"];
+        }
+
+        if ($search !== null) {
+            $sql .= " WHERE name LIKE ? OR email LIKE ?";
+            $params = ["%$search%", "%$search%"];
+        }
+
+        $sql .= " ORDER BY created_at DESC";
+
+        if ($limit !== null) {
+            $sql .= " LIMIT ?";
+            $params[] = $limit;
+        }
+
+        if ($page !== null && $limit !== null) {
+            $offset = ($page - 1) * $limit;
+            $sql .= " OFFSET ?";
+            $params[] = $offset;
+        }
+
+        $db = App::get('database');
+        return $db->fetchAll(
+            $sql,
+            $params,
+            static::class
+        );
+    }
 }
