@@ -64,7 +64,7 @@
                     <li class="nav-item my-3 mx-4 ">
                         <form action="/logout" method="POST">
                             <?= csrf_token() ?>
-                            <button class="btn btn-outline-danger w-100">
+                            <button class="btn btn-outline-danger w-100" onclick="return confirm('Are you sure?')">
                                 <i class="fas fa-power-off me-2"></i>Logout
                             </button>
                         </form>
@@ -98,7 +98,6 @@
     </div>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/script.js"></script>
-
 </body>
 
 </html>

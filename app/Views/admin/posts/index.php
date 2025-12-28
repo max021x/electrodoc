@@ -55,7 +55,7 @@
                                 <!-- Delete Action - Trash Bin Icon -->
                                 <form class="btn-group" action="/admin/posts/<?= $post->id ?>/delete" method="POST">
                                     <?= csrf_token() ?>
-                                    <button href="#" class="btn btn-outline-danger btn-delete" title="Delete Post">
+                                    <button href="#" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this post?')" title="Delete Post">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -70,15 +70,3 @@
     <!-- Paginate -->
     <?php require "../app/Views/_partials/pagination.php" ?>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const deleteButtons = document.querySelectorAll('.btn-delete');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                if (!confirm('Are you sure you want to delete this post?')) {
-                    e.preventDefault();
-                }
-            });
-        });
-    });
-</script>
