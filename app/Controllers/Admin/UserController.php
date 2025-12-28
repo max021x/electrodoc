@@ -125,12 +125,13 @@ class UserController
             $user->status = (int) $status;
         }
 
-
-        if ($password === $confirm_password && !empty($password) || !empty($confirm_password)) {
-            $user->password = password_hash($password, PASSWORD_DEFAULT);
-        } else {
-            $_SESSION['error'] = "Password Do Not Match";
-            Router::redirect("/admin/users/$id/edit");
+        if (!empty($password) || !empty($confirm_password)) {
+            if ($password === $confirm_password) {
+                $user->password = password_hash($password, PASSWORD_DEFAULT);
+            } else {
+                $_SESSION['error'] = "Password Do Not Match";
+                Router::redirect("/admin/users/$id/edit");
+            }
         }
 
         $user->save();
