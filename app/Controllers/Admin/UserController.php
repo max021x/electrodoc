@@ -22,7 +22,8 @@ class UserController
         $total = User::count();
         return Viewer::render(
             'admin/user/index',
-            [
+            [   
+                'active' => 'users' , 
                 'users' => $users,
                 'currentPage' => $page,
                 'totalPages' => ceil($total / $limit)
@@ -36,7 +37,7 @@ class UserController
         Authorization::verify('dashboard');
         return Viewer::render(
             'admin/user/create',
-            [],
+            ['active' => 'create_user'],
             'admin/layouts/main'
         );
     }

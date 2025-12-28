@@ -1,24 +1,260 @@
-<div class="card ">
-    <div class=" card-header">
-        <p><?= $post->id ?></p>
+<div class="admin-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="h3 mb-0">Edit Post</h1>
+            <p class="text-muted mb-0">Update your blog post</p>
+        </div>
+        <a href="/admin/posts" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Posts
+        </a>
     </div>
+</div>
+
+<!-- Error Alert -->
+<?php if (isset($error)): ?>
+<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+    <i class="fas fa-exclamation-circle me-2"></i>
+    <?= htmlspecialchars($error) ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<?php endif; ?>
+
+<!-- Success Alert -->
+<?php if (isset($success)): ?>
+<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    <i class="fas fa-check-circle me-2"></i>
+    <?= htmlspecialchars($success) ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<?php endif; ?>
+
+<div class="card mt-4">
     <div class="card-body">
-        <form action="/admin/posts/<?= $post->id  ?>/update" method="POST">
-            <?=csrf_token() ?>
-            <div>
-                <label for="title">Title</label>
-                <input class="card-title form-control" name="title" value="<?= $post->title ?>"></input>
+        <form id="editPostForm" action="/admin/posts/<?= $post->id ?>" method="POST" enctype="multipart/form-data">
+            <?= csrf_token() ?>
+            <input type="hidden" name="_method" value="PUT">
+            
+            <!-- Title Field -->
+            <div class="mb-3">
+                <label for="postTitle" class="form-label fw-semibold">Post Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="postTitle" name="title"
+                       value="<?= htmlspecialchars($post->title) ?>"
+                       placeholder="Enter post title here..." required>
+                <div class="form-text">The main title of your blog post</div>
             </div>
-            <div>
-                <label for="content">Content</label>
-                <textarea class="card-text form-control"><?= $post->content ?></textarea>
+
+            <!-- Category Field -->
+            <div class="mb-3">
+                <label for="postCategory" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                <select class="form-select" id="postCategory" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Sensors" <?= $post->category === 'Sensors' ? 'selected' : '' ?>>Sensors</option>
+                    <option value="MicroController" <?= $post->category === 'MicroController' ? 'selected' : '' ?>>MicroController</option>
+                    <option value="Resistor" <?= $post->category === 'Resistor' ? 'selected' : '' ?>>Resistor</option>
+                    <option value="Capacitor" <?= $post->category === 'Capacitor' ? 'selected' : '' ?>>Capacitor</option>
+                </select>
+                <div class="form-text">Choose the appropriate category for your post</div>
             </div>
-            <div class="d-grid">
-                <button class="btn btn-success mt-3">Update</button>
+
+            <!-- Current Image Display -->
+            <?php if (!empty($post->image)): ?>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Current Image</label>
+                <div class="border rounded p-3 bg-light">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img src="/uploads/posts/<?= htmlspecialchars($post->image) ?>" 
+                                 alt="Current image" 
+                                 class="img-fluid rounded" 
+                                 style="max-height: 80px; max-width: 120px;">
+                            <div class="ms-3 text-start">
+                                <small class="text-muted d-block">Current featured image</small>
+                                <small><?= htmlspecialchars(basename($post->image)) ?></small>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="removeImage" name="remove_image" value="1">
+                                <label class="form-check-label text-danger" for="removeImage">
+                                    Remove Image
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-text small">Check "Remove Image" to delete the current image</div>
+            </div>
+            <?php endif; ?>
+
+            <!-- New Image Upload -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <?php if (!empty($post->image)): ?>
+                    Replace Image
+                    <?php else: ?>
+                    Add Featured Image
+                    <?php endif; ?>
+                </label>
+                <div class="border rounded p-3 text-center bg-light">
+                    <div id="imagePreview" class="d-none">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <img src="" alt="Preview" class="img-fluid rounded" style="max-height: 80px; max-width: 120px;">
+                                <div class="ms-3 text-start">
+                                    <small class="text-muted d-block">New image selected</small>
+                                    <small id="fileName"></small>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="removeImage()">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                    <div id="imageUploadArea">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <i class="fas fa-image text-muted me-2"></i>
+                            <div class="text-start">
+                                <p class="mb-1 small">
+                                    <?php if (!empty($post->image)): ?>
+                                    Upload new image (optional)
+                                    <?php else: ?>
+                                    Upload featured image (optional)
+                                    <?php endif; ?>
+                                </p>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="document.getElementById('imageFile').click()">
+                                    <i class="fas fa-upload"></i> Choose Image
+                                </button>
+                                <input type="file" id="imageFile" name="image" class="d-none" accept="image/*" onchange="previewImage(event)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-text small">Recommended size: 1200×600px. Leave empty to keep current image.</div>
+            </div>
+
+            <!-- Content Field -->
+            <div class="mb-3">
+                <label for="postContent" class="form-label fw-semibold">Post Content <span class="text-danger">*</span></label>
+                <textarea class="form-control" id="postContent" name="content" rows="6" 
+                          placeholder="Write your post content here..." required><?= htmlspecialchars($post->content) ?></textarea>
+                <div class="form-text small">
+                    Write your content clearly and engagingly
+                </div>
+            </div>
+
+            <!-- Post Information -->
+            <div class="mt-4 pt-3 border-top">
+                <h6 class="fw-bold mb-3">
+                    <i class="fas fa-info-circle text-info me-2"></i>
+                    Post Information
+                </h6>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="border rounded p-3">
+                            <small class="text-muted d-block">Post ID</small>
+                            <strong><?= $post->id ?></strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="border rounded p-3">
+                            <small class="text-muted d-block">Created Date</small>
+                            <strong><?= date('F j, Y', strtotime($post->created_at)) ?></strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="border rounded p-3">
+                            <small class="text-muted d-block">Views</small>
+                            <strong><?= number_format($post->views ?? 0) ?></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                <a href="/admin/posts" class="btn btn-outline-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+                <div class="d-flex gap-2">
+                    <button type="reset" class="btn btn-outline-secondary">
+                        <i class="fas fa-redo"></i> Reset Changes
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Update Post
+                    </button>
+                </div>
             </div>
         </form>
     </div>
-    <div class="card-footer">
-        <p><?= $post->created_at ?></p>
-    </div>
 </div>
+
+<script>
+    // Image preview function
+    function previewImage(event) {
+        const input = event.target;
+        const file = input.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            const fileName = document.getElementById('fileName');
+            
+            reader.onload = function() {
+                const imagePreview = document.getElementById('imagePreview');
+                const imageUploadArea = document.getElementById('imageUploadArea');
+                const img = imagePreview.querySelector('img');
+                
+                img.src = reader.result;
+                fileName.textContent = file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name;
+                imagePreview.classList.remove('d-none');
+                imageUploadArea.classList.add('d-none');
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Remove image function
+    function removeImage() {
+        const imagePreview = document.getElementById('imagePreview');
+        const imageUploadArea = document.getElementById('imageUploadArea');
+        const fileInput = document.getElementById('imageFile');
+        
+        imagePreview.classList.add('d-none');
+        imageUploadArea.classList.remove('d-none');
+        fileInput.value = '';
+    }
+
+    // Form submission with validation
+    document.getElementById('editPostForm').addEventListener('submit', function(e) {
+        const title = document.getElementById('postTitle').value.trim();
+        const category = document.getElementById('postCategory').value;
+        const content = document.getElementById('postContent').value.trim();
+        
+        if (!title) {
+            e.preventDefault();
+            alert('Please enter a post title');
+            document.getElementById('postTitle').focus();
+            return;
+        }
+        
+        if (!category) {
+            e.preventDefault();
+            alert('Please select a category');
+            document.getElementById('postCategory').focus();
+            return;
+        }
+        
+        if (!content) {
+            e.preventDefault();
+            alert('Please enter post content');
+            document.getElementById('postContent').focus();
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating...';
+        submitBtn.disabled = true;
+    });
+</script>

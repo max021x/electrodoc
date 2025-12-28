@@ -5,7 +5,7 @@
             <p class="text-muted mb-0">Add a new blog post to your website</p>
         </div>
         <a href="/admin/posts" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left"></i> Back to Posts
+            <i class="fas fa-arrow-left"></i> Back to Posts
         </a>
     </div>
 </div>
@@ -13,16 +13,30 @@
 <div class="card mt-4">
     <div class="card-body">
         <form id="createPostForm" action="/admin/posts/store" method="POST" enctype="multipart/form-data">
+            <?= csrf_token() ?>
+            
             <!-- Title Field -->
-             <?=csrf_token() ?>
             <div class="mb-3">
-                <label for="postTitle" class="form-label fw-semibold">Post Title *</label>
+                <label for="postTitle" class="form-label fw-semibold">Post Title <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="postTitle" name="title"
                        placeholder="Enter post title here..." required>
                 <div class="form-text">The main title of your blog post</div>
             </div>
 
-            <!-- Image Upload - Compact Version -->
+            <!-- Category Field -->
+            <div class="mb-3">
+                <label for="postCategory" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                <select class="form-select" id="postCategory" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Sensors">Sensors</option>
+                    <option value="MicroController">MicroController</option>
+                    <option value="Resistor">Resistor</option>
+                    <option value="Capacitor">Capacitor</option>
+                </select>
+                <div class="form-text">Choose the appropriate category for your post</div>
+            </div>
+
+            <!-- Image Upload -->
             <div class="mb-3">
                 <label class="form-label fw-semibold">Featured Image</label>
                 <div class="border rounded p-3 text-center bg-light">
@@ -36,17 +50,17 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-sm btn-danger" onclick="removeImage()">
-                                <i class="bi bi-trash"></i> Remove
+                                <i class="fas fa-trash"></i> Remove
                             </button>
                         </div>
                     </div>
                     <div id="imageUploadArea">
                         <div class="d-flex align-items-center justify-content-center">
-                            <i class="bi bi-image text-muted me-2"></i>
+                            <i class="fas fa-image text-muted me-2"></i>
                             <div class="text-start">
                                 <p class="mb-1 small">Upload featured image (optional)</p>
                                 <button type="button" class="btn btn-sm btn-outline-primary" onclick="document.getElementById('imageFile').click()">
-                                    <i class="bi bi-upload"></i> Choose Image
+                                    <i class="fas fa-upload"></i> Choose Image
                                 </button>
                                 <input type="file" id="imageFile" name="image" class="d-none" accept="image/*" onchange="previewImage(event)">
                             </div>
@@ -56,10 +70,10 @@
                 <div class="form-text small">Recommended size: 1200×600px</div>
             </div>
 
-            <!-- Content Field - Smaller -->
+            <!-- Content Field -->
             <div class="mb-3">
-                <label for="postContent" class="form-label fw-semibold">Post Content *</label>
-                <textarea class="form-control" id="postContent" name="content" rows="4" 
+                <label for="postContent" class="form-label fw-semibold">Post Content <span class="text-danger">*</span></label>
+                <textarea class="form-control" id="postContent" name="content" rows="6" 
                           placeholder="Write your post content here..." required></textarea>
                 <div class="form-text small">
                     Write your content clearly and engagingly
@@ -69,10 +83,10 @@
             <!-- Action Buttons -->
             <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
                 <a href="/admin/posts" class="btn btn-outline-secondary">
-                    <i class="bi bi-x-circle"></i> Cancel
+                    <i class="fas fa-times"></i> Cancel
                 </a>
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save"></i> Publish Post
+                    <i class="fas fa-save"></i> Publish Post
                 </button>
             </div>
         </form>
@@ -111,19 +125,27 @@
         const fileInput = document.getElementById('imageFile');
         
         imagePreview.classList.add('d-none');
-        imageUploadArea.classList.remove('d-none');;
+        imageUploadArea.classList.remove('d-none');
         fileInput.value = '';
     }
 
     // Form submission with validation
     document.getElementById('createPostForm').addEventListener('submit', function(e) {
         const title = document.getElementById('postTitle').value.trim();
+        const category = document.getElementById('postCategory').value;
         const content = document.getElementById('postContent').value.trim();
         
         if (!title) {
             e.preventDefault();
             alert('Please enter a post title');
             document.getElementById('postTitle').focus();
+            return;
+        }
+        
+        if (!category) {
+            e.preventDefault();
+            alert('Please select a category');
+            document.getElementById('postCategory').focus();
             return;
         }
         

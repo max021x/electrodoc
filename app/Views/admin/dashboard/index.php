@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <a href="#" class="text-decoration-none small">
+                    <a href="/admin/contacts" class="text-decoration-none small">
                         View messages <i class="fas fa-arrow-right ms-1"></i>
                     </a>
                 </div>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <a href="#" class="text-decoration-none small">
+                    <a href="/admin/users" class="text-decoration-none small">
                         View users <i class="fas fa-arrow-right ms-1"></i>
                     </a>
                 </div>
