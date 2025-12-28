@@ -2,8 +2,10 @@
 
 namespace App\Services ;
 
+use App\Models\Contact;
 use Core\Router;
-use App\Models\Post ; 
+use App\Models\Post ;
+use App\Models\User;
 
 class Authorization {
 
@@ -28,6 +30,8 @@ class Authorization {
         return match ($action) {
             'dashboard' => in_array($user->role , ['admin' , 'superadmin']) ,
             'edit_post','delete_post' => $resource instanceof Post && in_array($user->role, ['admin', 'superadmin']) ,
+            'edit_user','delete_user' => $resource instanceof User && in_array($user->role, ['admin', 'superadmin']) ,
+            'delete_contact' => $resource instanceof Contact && in_array($user->role, ['admin', 'superadmin']) ,
             'create_post' , => true , 
             default => false 
         } ;

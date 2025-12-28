@@ -114,7 +114,7 @@ class PostController
     public function delete($id)
     {
         $post = Post::find($id);
-        Authorization::verify('dashboard');
+        Authorization::verify('delete_post' , $post);
         // if(!$post) {
         // view with the error of undefined id
         // }   

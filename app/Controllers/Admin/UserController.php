@@ -94,8 +94,8 @@ class UserController
 
     public function update($id)
     {
-        Authorization::verify('dashboard');
         $user = User::find($id);
+        Authorization::verify('edit_user' , $user);
 
         if (!$user) {
             return Viewer::render(
