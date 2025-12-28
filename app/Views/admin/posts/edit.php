@@ -30,7 +30,7 @@
 
 <div class="card mt-4">
     <div class="card-body">
-        <form id="editPostForm" action="/admin/posts/<?= $post->id ?>" method="POST" enctype="multipart/form-data">
+        <form id="editPostForm" action="/admin/posts/<?= $post->id ?>/update" method="POST" enctype="multipart/form-data">
             <?= csrf_token() ?>
             <input type="hidden" name="_method" value="PUT">
             
@@ -76,7 +76,7 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="removeImage" name="remove_image" value="1">
                                 <label class="form-check-label text-danger" for="removeImage">
-                                    Remove Image
+                                    <i class="fas fa-trash me-1"></i> Remove Image
                                 </label>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                     <small id="fileName"></small>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-sm btn-danger" onclick="removeImage()">
+                            <button type="button" id="removeImageBtn" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash"></i> Remove
                             </button>
                         </div>
@@ -121,10 +121,10 @@
                                     Upload featured image (optional)
                                     <?php endif; ?>
                                 </p>
-                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="document.getElementById('imageFile').click()">
+                                <button type="button" id="chooseImageBtn" class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-upload"></i> Choose Image
                                 </button>
-                                <input type="file" id="imageFile" name="image" class="d-none" accept="image/*" onchange="previewImage(event)">
+                                <input type="file" id="imageFile" name="image" class="d-none" accept="image/*">
                             </div>
                         </div>
                     </div>
@@ -175,20 +175,38 @@
                 <a href="/admin/posts" class="btn btn-outline-secondary">
                     <i class="fas fa-times"></i> Cancel
                 </a>
-                <div class="d-flex gap-2">
-                    <button type="reset" class="btn btn-outline-secondary">
-                        <i class="fas fa-redo"></i> Reset Changes
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Update Post
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Update Post
+                </button>
             </div>
         </form>
     </div>
 </div>
 
 <script>
+    // Get DOM elements
+    const imageFileInput = document.getElementById('imageFile');
+    const chooseImageBtn = document.getElementById('chooseImageBtn');
+    const removeImageBtn = document.getElementById('removeImageBtn');
+    const imagePreview = document.getElementById('imagePreview');
+    const imageUploadArea = document.getElementById('imageUploadArea');
+    const fileName = document.getElementById('fileName');
+    
+    // Event listener for choose image button
+    chooseImageBtn.addEventListener('click', function() {
+        imageFileInput.click();
+    });
+    
+    // Event listener for file input change
+    imageFileInput.addEventListener('change', function(event) {
+        previewImage(event);
+    });
+    
+    // Event listener for remove image button
+    removeImageBtn.addEventListener('click', function() {
+        removeImage();
+    });
+    
     // Image preview function
     function previewImage(event) {
         const input = event.target;
@@ -196,11 +214,8 @@
         
         if (file) {
             const reader = new FileReader();
-            const fileName = document.getElementById('fileName');
             
             reader.onload = function() {
-                const imagePreview = document.getElementById('imagePreview');
-                const imageUploadArea = document.getElementById('imageUploadArea');
                 const img = imagePreview.querySelector('img');
                 
                 img.src = reader.result;
@@ -215,13 +230,9 @@
 
     // Remove image function
     function removeImage() {
-        const imagePreview = document.getElementById('imagePreview');
-        const imageUploadArea = document.getElementById('imageUploadArea');
-        const fileInput = document.getElementById('imageFile');
-        
         imagePreview.classList.add('d-none');
         imageUploadArea.classList.remove('d-none');
-        fileInput.value = '';
+        imageFileInput.value = '';
     }
 
     // Form submission with validation

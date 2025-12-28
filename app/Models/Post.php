@@ -14,8 +14,8 @@ class Post extends Model
     public $content;
     public $image;
     public $views;
-    public $category_id;
     public $user_id;
+    public $category;
     public $created_at;
     public $updated_at;
 
@@ -31,7 +31,7 @@ class Post extends Model
             $params = ["%$search%", "%$search%"];
         }
 
-        $sql .= " ORDER BY created_at DESC" ; 
+        $sql .= " ORDER BY created_at DESC";
 
         if ($limit !== null) {
             $sql .= " LIMIT ?";
@@ -80,5 +80,34 @@ class Post extends Model
                 [$id]
             );
         }
+    }
+
+    public static function imageHandler($file)
+    {   
+
+        $fileType = $file['type'];
+
+        if (!in_array($fileType, ['image/png', 'image/jpeg'])) {
+            var_dump($fileType);
+            exit("Error File Type");
+        }
+
+        if ($file['size'] > 2 * 1024 * 1024) {
+            exit("Error File Size");
+        }
+
+        $uploadDir = __DIR__ . '/../../public/uploads/posts/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $fileName = uniqid('post_', true) . '.' . $extension;
+        $destination = $uploadDir . $fileName;
+        if (!move_uploaded_file($file['tmp_name'], $destination)) {
+            exit("Error Did not Move");
+        }
+        
+        return $fileName ; 
     }
 }

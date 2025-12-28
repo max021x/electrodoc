@@ -29,7 +29,6 @@ class PostController
     {
 
         $post = Post::find($id);
-
         if (!$post) {
             Router::notFound();
         }

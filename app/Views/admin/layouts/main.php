@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="container-fluid" x-data="{active:'<?= $active ?>'}">
+    <div class="container-fluid" x-data="{active:'<?= isset($active) ? $active : false ?>'}">
         <div class="row">
             <!-- Sidebar -->
             <div id="sidebar" class="col-md-3 col-lg-2 px-0">

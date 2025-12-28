@@ -14,14 +14,19 @@ class ContactController
     public function  index()
     {
         Authorization::verify('dashboard');
-        $page = $_GET['page'] ?? 1 ;
-        $search = $_GET['search'] ?? "" ;
-        $limit = 1 ; 
-        $contacts = Contact::getRecent(limit: $limit, page: $page , search:$search);
+        $page = $_GET['page'] ?? 1;
+        $search = $_GET['search'] ?? "";
+        $limit = 1;
+        $contacts = Contact::getRecent(limit: $limit, page: $page, search: $search);
         $total = Contact::count();
         return Viewer::render(
             'admin/contacts/index',
-            ['contacts' => $contacts, 'currentPage' => $page, 'totalPages' => ceil($total / $limit)],
+            [   
+                'active' => 'contacts' , 
+                'contacts' => $contacts,
+                'currentPage' => $page,
+                'totalPages' => ceil($total / $limit)
+            ],
             'admin/layouts/main'
         );
     }
