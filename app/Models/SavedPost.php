@@ -29,14 +29,15 @@ class SavedPost extends Model
   public static function getRecent(?string $limit, ?string $page)
   {
     $user = Auth::user()->id;
+
     if (!$user) {
       return [];
     }
-
+  
     $sql  = "SELECT saved_posts.id  , post_id , saved_at , posts.* FROM " . static::$table;
-    $sql .= " JOIN posts ON saved_posts.id = posts.id WHERE saved_posts.user_id = ? ";
+    $sql .= " JOIN posts ON saved_posts.post_id = posts.id WHERE saved_posts.user_id = ? ";
     $params = [$user];
-
+    
     if ($limit !== null) {
       $sql .= " LIMIT ?";
       $params[] = $limit;
@@ -47,7 +48,6 @@ class SavedPost extends Model
       $sql .= " OFFSET ?";
       $params[] =  $offset;
     }
-
     $db = App::get('database');
     return $db->fetchAll($sql, $params, static::class);
   }
@@ -64,7 +64,7 @@ class SavedPost extends Model
   { 
 
     $db= App::get('database') ; 
-    $isSaved = $db->query("SELECT id FROM saved_posts WHERE user_id = ? AND post_id = ?" , [$userId , $postId]);
+    $isSaved = $db->fetch("SELECT id FROM saved_posts WHERE user_id = ? AND post_id = ?" , [$userId , $postId], static::class);
     if ($isSaved) {
       return true ; 
     }

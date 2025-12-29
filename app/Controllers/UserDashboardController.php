@@ -106,9 +106,10 @@ class UserDashboardController
         $user = Auth::user()->id;
         // if(!$user) {
         // }
-        $post = SavedPost::find($id)->id;
+        $post = SavedPost::find($id);
         // if(!$post) {
         // }
+        var_dump($post) ; die ; 
         SavedPost::deletePost($user, $post);
         Router::redirect("/dashboard");
     }
