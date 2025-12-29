@@ -22,8 +22,8 @@ class UserController
         $total = User::count();
         return Viewer::render(
             'admin/user/index',
-            [   
-                'active' => 'users' , 
+            [
+                'active' => 'users',
                 'users' => $users,
                 'currentPage' => $page,
                 'totalPages' => ceil($total / $limit)
@@ -96,7 +96,7 @@ class UserController
     public function update($id)
     {
         $user = User::find($id);
-        Authorization::verify('edit_user' , $user);
+        Authorization::verify('edit_user', $user);
 
         if (!$user) {
             return Viewer::render(
@@ -113,9 +113,12 @@ class UserController
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
 
-        if (!empty($email) && User::findByEmail($email) === false || $user->email === $email) {
-            $user->email = $email;
-        } else {
+        if (User::findByEmail($email) === false || $user->email === $email) {
+            if (!empty($email) || $user->email === $email) {
+                $user->email = $email;
+            }
+        } 
+        else {
             $_SESSION['error'] = "This email is already registered. Please use a different email address .";
             Router::redirect("/admin/users/$id/edit");
         }

@@ -56,7 +56,7 @@
                 </div>
                 <div class="card-body">
                     <p class="text-muted small mb-3">Current: <?= htmlspecialchars($user->email) ?></p>
-                    <form action="/user/update-email" method="POST" class="mt-4">
+                    <form action="/email/update" method="POST" class="mt-4">
                         <?= csrf_token() ?>
                         <div class="mb-3">
                             <label class="form-label">New Email</label>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" name="password" required>
+                            <input type="password" class="form-control" name="confirm_password" required>
                         </div>
                         <button type="submit" class="btn btn-success w-100">
                             <i class="fas fa-save me-1"></i> Update Email

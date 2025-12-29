@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Services\Auth;
 use Core\App;
 use Core\Model;
+use Core\Router;
 
 class SavedPost extends Model
 {
@@ -16,13 +17,13 @@ class SavedPost extends Model
   public $saved_at;
 
   // posts 
-  public $title ; 
-  public $content ; 
-  public $image; 
-  public $views ; 
-  public $category ; 
-  public $created_at ; 
-  public $updated_at ; 
+  public $title;
+  public $content;
+  public $image;
+  public $views;
+  public $category;
+  public $created_at;
+  public $updated_at;
 
 
   public static function getRecent(?string $limit, ?string $page)
@@ -47,15 +48,27 @@ class SavedPost extends Model
       $params[] =  $offset;
     }
 
-
     $db = App::get('database');
     return $db->fetchAll($sql, $params, static::class);
   }
 
-  public static function deletePost ($userId , $postId) {
-    $db = App::get('database') ;
-    $sql = "DELETE FROM " . static::$table . " WHERE user_id = ? AND post_id = ?" ;  
-    $params = [$userId , $postId] ; 
-    $db->query($sql , $params) ; 
+  public static function deletePost($userId, $postId)
+  {
+    $db = App::get('database');
+    $sql = "DELETE FROM " . static::$table . " WHERE user_id = ? AND post_id = ?";
+    $params = [$userId, $postId];
+    $db->query($sql, $params);
+  }
+
+  public static function isSaved($userId, $postId)
+  { 
+
+    $db= App::get('database') ; 
+    $isSaved = $db->query("SELECT id FROM saved_posts WHERE user_id = ? AND post_id = ?" , [$userId , $postId]);
+    if ($isSaved) {
+      return true ; 
+    }
+
+    return false ; 
   }
 }
