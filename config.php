@@ -1,15 +1,17 @@
 <?php
 
+$env = parse_ini_file('.env');
+
 return [
     'app' => [
-        'AppName' => 'electroDoc' , 
+        'AppName' => $env['APP_NAME'] , 
     ] , 
 
     'database' => [
-        'driver' => 'mysql' , 
-        'dbname' => 'electrodoc' , 
-        'username' => 'root' , 
-        'password' => '' , 
+        'driver' => $env['DRIVER'] ,  
+        'dbname' => $env['DBNAME'] , 
+        'username' => $env['USERNAME'] , 
+        'password' => $env['PASSWORD'] , 
     ]
 
 ] ; 
