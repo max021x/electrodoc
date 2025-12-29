@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electro Shop</title>
+    <title>ElectroDoc</title>
     <link rel="icon" href="">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/fontawesome.css">
@@ -27,7 +27,7 @@
                 <form action="/posts" method="GET">
                     <input type="hidden" name="page" value="1">
                     <div class="input-group" style="max-width: 500px;">
-                        <input type="text" name="search" class="form-control border-primary" placeholder="Search products...">
+                        <input type="text" name="search" class="form-control border-primary" placeholder="Search tutorials...">
                         <button class="btn btn-primary" type="button">
                             <i class="fas fa-search"></i>
                         </button>
@@ -159,7 +159,7 @@
     <div class="offcanvas offcanvas-end" id="electroNav" tabindex="-1">
         <div class="offcanvas-header border-bottom">
             <h5 class="offcanvas-title fw-bold text-primary">
-                <i class="fas fa-bolt me-2"></i>ElectroShop
+                <i class="fas fa-bolt me-2"></i>ElectroDoc
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
@@ -204,7 +204,7 @@
                     <form action="/posts" method="GET" class="mt-3">
                         <?= csrf_token() ?>
                         <div class="input-group">
-                            <input type="text" name="search" id="search" class="form-control border-primary" placeholder="Search...">
+                            <input type="text" name="search" id="search" class="form-control border-primary" placeholder="Search tutorials...">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -224,67 +224,67 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="fw-bold mb-3">About ElectroShop</h5>
+                    <h5 class="fw-bold mb-3">About ElectroDoc</h5>
                     <p class="text-muted">
-                        Your one-stop destination for all electronic needs. We offer quality products
-                        with the best prices and customer service in the industry.
+                        Your comprehensive resource for electronics education. We provide detailed tutorials, 
+                        circuit guides, and project documentation for enthusiasts, students, and professionals.
                     </p>
                 </div>
                 <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <h5 class="fw-bold mb-3">Technical Resources</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
                             <a href="#" class="text-decoration-none text-dark">
-                                <i class="fas fa-angle-right me-2"></i>Terms & Conditions
+                                <i class="fas fa-angle-right me-2"></i>Circuit Schematics
                             </a>
                         </li>
                         <li class="mb-2">
                             <a href="#" class="text-decoration-none text-dark">
-                                <i class="fas fa-angle-right me-2"></i>Privacy Policy
+                                <i class="fas fa-angle-right me-2"></i>Component Datasheets
                             </a>
                         </li>
                         <li class="mb-2">
                             <a href="#" class="text-decoration-none text-dark">
-                                <i class="fas fa-angle-right me-2"></i>Return Policy
+                                <i class="fas fa-angle-right me-2"></i>Project Documentation
                             </a>
                         </li>
                         <li class="mb-2">
                             <a href="/" class="text-decoration-none text-dark">
-                                <i class="fas fa-angle-right me-2"></i>Home
+                                <i class="fas fa-angle-right me-2"></i>Tutorials Home
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h5 class="fw-bold mb-3">Connect With Us</h5>
+                    <h5 class="fw-bold mb-3">Connect With Our Community</h5>
                     <div class="mb-4">
                         <a href="#" class="text-decoration-none me-3">
-                            <i class="fab fa-facebook fa-2x text-primary"></i>
+                            <i class="fab fa-github fa-2x text-dark"></i>
                         </a>
                         <a href="#" class="text-decoration-none me-3">
-                            <i class="fab fa-twitter fa-2x text-info"></i>
+                            <i class="fab fa-youtube fa-2x text-danger"></i>
                         </a>
                         <a href="#" class="text-decoration-none me-3">
-                            <i class="fab fa-instagram fa-2x text-danger"></i>
+                            <i class="fab fa-discord fa-2x text-primary"></i>
                         </a>
                         <a href="#" class="text-decoration-none">
-                            <i class="fab fa-youtube fa-2x text-danger"></i>
+                            <i class="fab fa-stack-overflow fa-2x text-warning"></i>
                         </a>
                     </div>
                     <p class="text-muted mb-1">
                         <i class="fas fa-envelope me-2"></i>
-                        <a href="mailto:support@electroshop.com" class="text-decoration-none text-dark">
-                            support@electroshop.com
+                        <a href="mailto:support@electrodoc.com" class="text-decoration-none text-dark">
+                            support@electrodoc.com
                         </a>
                     </p>
                     <p class="text-muted mb-0">
-                        <i class="fas fa-phone me-2"></i>+1 (555) 123-4567
+                        <i class="fas fa-comment me-2"></i>Technical Forum Available
                     </p>
                 </div>
             </div>
             <hr class="mt-4">
             <div class="text-center text-muted">
-                <p class="mb-0">&copy; 2024 ElectroShop. All rights reserved.</p>
+                <p class="mb-0">&copy; 2024 ElectroDoc Electronics Tutorials. All technical content is open-source.</p>
             </div>
         </div>
     </footer>

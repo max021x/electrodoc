@@ -27,22 +27,22 @@
                 <div class="row">
                     <div class="col-md-6 my-auto">
                         <div class="image-container mb-5 px-4">
-                            <img src="images/esp32.jpg" class="img-fluid rounded d-block w-100" alt="">
+                            <img src="images/esp32.jpg" class="img-fluid rounded d-block w-100" alt="ESP32 Microcontroller">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="text-container p-4 d-flex flex-column justify-content-center h-100 mb-5">
-                            <h1 class="display-3 fw-bold">welcome To Blog Mastery</h1>
+                            <h1 class="display-3 fw-bold">ElectroDoc</h1>
                             <p class="lead">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae non libero, nihil consequuntur
-                                cupiditate repellat optio nobis vero temporibus et quod? Voluptatibus accusamus error, iste quisquam ex
-                                blanditiis a inventore officia. Nesciunt magni in aliquam non saepe repellendus at dolorum?
+                                Master the world of electronics with comprehensive tutorials, circuit analysis, and hands-on projects. 
+                                From basic components to advanced microcontroller programming, ElectroDoc provides the knowledge 
+                                you need to bring your electronic creations to life.
                             </p>
 
                             <!-- Form -->
                             <div class="form-container text-center">
                                 <div class="d-grid">
-                                    <a href="/login" class="btn btn-primary btn-lg text-white">Login</a>
+                                    <a href="/login" class="btn btn-primary btn-lg text-white">Login to Explore</a>
                                 </div>
                             </div>
                         </div>
@@ -72,20 +72,17 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <h2>
-                        Creating <span class="text-secondary">Inspiring</span> Office
-                        Spaces
+                        Master <span class="text-secondary">Practical Electronics</span>
                     </h2>
                     <p class="fs-5">
-                        At our company, designing office spaces is our passion. We take
-                        pride in our completed projects that reflect our dedication and
-                        expertise in creating functional and aesthetically pleasing work
-                        environments.
+                        ElectroDoc bridges theory and practice with detailed guides on circuit design, component selection, 
+                        and embedded systems development. Our tutorials cover everything from Ohm's Law fundamentals to 
+                        advanced IoT implementations with ESP32 and Arduino platforms.
                     </p>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- Services -->
     <section id="services" class="services bg-light py-6">
@@ -94,13 +91,11 @@
                 <div class="col-lg-5">
                     <div class="text-container text-center text-lg-start">
                         <h2>
-                            <span class="text-secondary">Services</span> that we offer
+                            Our <span class="text-secondary">Expertise</span>
                         </h2>
                         <p>
-                            At our company, we provide a wide range of services to meet all
-                            your office design needs. With our expertise and attention to
-                            detail, we ensure that every aspect of your office space is
-                            carefully considered and executed.
+                            We provide comprehensive resources covering all aspects of modern electronics development 
+                            and project implementation for makers, students, and professionals.
                         </p>
                     </div>
                 </div>
@@ -108,29 +103,29 @@
                     <div class="row mb-4">
                         <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-rocket fa-4x text-secondary mb-2"></i>
-                            <p class="fs-5 fw-bold">Space Analysis & Planning</p>
+                            <p class="fs-5 fw-bold">PCB Design</p>
                         </div>
                         <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-clock fa-4x text-secondary mb-2"></i>
-                            <p class="fs-5 fw-bold">Design & Color Choosing</p>
+                            <p class="fs-5 fw-bold">Microcontrollers</p>
                         </div>
                         <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-comments fa-4x text-secondary mb-2"></i>
-                            <p class="fs-5 fw-bold">Materials & Delivery</p>
+                            <p class="fs-5 fw-bold">Signal Analysis</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-tools fa-4x text-secondary mb-2"></i>
-                            <p class="fs-5 fw-bold">Execute The Concept</p>
+                            <p class="fs-5 fw-bold">Sensor Integration</p>
                         </div>
                         <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-chart-pie fa-4x text-secondary mb-2"></i>
-                            <p class="fs-5 fw-bold">Create A Great Atmosphere</p>
+                            <p class="fs-5 fw-bold">Power Management</p>
                         </div>
                         <div class="col-md-4 d-flex flex-column align-items-center text-center">
                             <i class="fas fa-chart-bar fa-4x text-secondary mb-2"></i>
-                            <p class="fs-5 fw-bold">Evaluation & Reporting</p>
+                            <p class="fs-5 fw-bold">Prototyping</p>
                         </div>
                     </div>
                 </div>
@@ -144,12 +139,16 @@
             <div class="row">
                 <div class="col-lg-6 d-none d-md-block">
                     <div class="image-container">
-                        <img src="images/contact.png" alt="" class="img-fluid" />
+                        <img src="images/contact.png" alt="Electronic Components" class="img-fluid" />
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="text-container">
-                        <h2>Contact Us For A Quote</h2>
+                        <h2>Technical Support & Collaboration</h2>
+                        <p>
+                            Have questions about circuit design, component selection, or project troubleshooting? 
+                            Our electronics experts are ready to assist with technical guidance and collaboration opportunities.
+                        </p>
                         <form action="/contact" method="POST">
                             <?= csrf_token() ?>
                             <div class="mb-3">
@@ -158,7 +157,7 @@
                                     id="name"
                                     type="text"
                                     class="form-control"
-                                    placeholder="Enter name" />
+                                    placeholder="Your name" />
                             </div>
                             <div class="mb-3">
                                 <input
@@ -166,20 +165,20 @@
                                     id="email"
                                     type="email"
                                     class="form-control"
-                                    placeholder="Enter email" />
+                                    placeholder="Your email" />
                             </div>
                             <div class="mb-3">
                                 <textarea
                                     name="message"
                                     id="message"
                                     class="form-control"
-                                    placeholder="Enter message"
+                                    placeholder="Describe your electronics project or technical question"
                                     rows="8"></textarea>
                             </div>
                             <div class="d-grid gap-2">
                                 <input
                                     type="submit"
-                                    value="Send"
+                                    value="Send Technical Inquiry"
                                     class="btn btn-primary btn-block" />
                             </div>
                         </form>
