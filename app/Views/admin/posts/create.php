@@ -10,6 +10,16 @@
     </div>
 </div>
 
+<!-- Error Alert -->
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        <?= htmlspecialchars($_SESSION['error']) ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
 <div class="card mt-4">
     <div class="card-body">
         <form id="createPostForm" action="/admin/posts/store" method="POST" enctype="multipart/form-data">

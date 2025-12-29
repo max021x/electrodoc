@@ -48,6 +48,9 @@ class PostController
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $fileName  = Post::imageHandler($_FILES['image']);
+            if($fileName === false) {
+                Router::redirect('/admin/posts/create') ; 
+            }   
         }
 
         $data = [

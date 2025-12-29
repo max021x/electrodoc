@@ -20,7 +20,7 @@ class Post extends Model
     public $updated_at;
 
 
-    public static function getRecent(?string $category , ?int $limit = null, ?int $page = null, ?string $search = null)
+    public static function getRecent(?string $category, ?int $limit = null, ?int $page = null, ?string $search = null)
     {
 
         $sql = "SELECT * FROM " . static::$table;
@@ -93,12 +93,13 @@ class Post extends Model
         $fileType = $file['type'];
 
         if (!in_array($fileType, ['image/png', 'image/jpeg'])) {
-            var_dump($fileType);
-            exit("Error File Type");
+            $_SESSION['error'] = "Error File Type : type must be png or jpg";
+            return false;
         }
 
         if ($file['size'] > 2 * 1024 * 1024) {
-            exit("Error File Size");
+            $_SESSION['error'] = "Error File size : size must be smaller than 2MB";
+            return false;
         }
 
         $uploadDir = __DIR__ . '/../../public/uploads/posts/';
@@ -110,7 +111,8 @@ class Post extends Model
         $fileName = uniqid('post_', true) . '.' . $extension;
         $destination = $uploadDir . $fileName;
         if (!move_uploaded_file($file['tmp_name'], $destination)) {
-            exit("Error Did not Move");
+            $_SESSION['error'] = "Sorry we could not move the file try again";
+            return false;
         }
 
         return $fileName;
