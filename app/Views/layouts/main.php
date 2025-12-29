@@ -98,7 +98,7 @@
                         </a>
                     </li> -->
                     <li class="nav-item mx-2">
-                        <a href="#" class="nav-link text-dark">
+                        <a href="https://github.com/max021x/electrodoc/tree/master" target="_blank" class="nav-link text-dark">
                             <i class="fab fa-github"></i>
                         </a>
                     </li>
@@ -193,7 +193,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a href="#" class="nav-link text-dark d-flex align-items-center">
+                    <a href="https://github.com/max021x/electrodoc/tree/master" target="_blank" class="nav-link text-dark d-flex align-items-center">
                         <i class="fab fa-github me-3"></i>GitHub
                     </a>
                 </li>
@@ -258,7 +258,7 @@
                 <div class="col-md-4">
                     <h5 class="fw-bold mb-3">Connect With Our Community</h5>
                     <div class="mb-4">
-                        <a href="#" class="text-decoration-none me-3">
+                        <a href="https://github.com/max021x/electrodoc/tree/master" target="_blank" class="text-decoration-none me-3">
                             <i class="fab fa-github fa-2x text-dark"></i>
                         </a>
                         <a href="#" class="text-decoration-none me-3">
