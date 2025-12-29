@@ -1,7 +1,49 @@
 <div class="container my-5">
+    <!-- Category Filter Buttons -->
+    <div class="mb-4">
+        <div class="d-flex flex-wrap gap-2 mb-3 justify-content-center">
+            <a href="/posts" class="btn btn-outline-primary <?= !isset($_GET['category']) ? 'active' : '' ?>">
+                All Tutorials
+            </a>
+            <a href="/posts?category=Sensors" class="btn btn-outline-primary <?= isset($_GET['category']) && $_GET['category'] == 'Sensors' ? 'active' : '' ?>">
+                Sensors
+            </a>
+            <a href="/posts?category=MicroController" class="btn btn-outline-primary <?= isset($_GET['category']) && $_GET['category'] == 'MicroController' ? 'active' : '' ?>">
+                MicroController
+            </a>
+            <a href="/posts?category=Resistor" class="btn btn-outline-primary <?= isset($_GET['category']) && $_GET['category'] == 'Resistor' ? 'active' : '' ?>">
+                Resistor
+            </a>
+            <a href="/posts?category=Capacitor" class="btn btn-outline-primary <?= isset($_GET['category']) && $_GET['category'] == 'Capacitor' ? 'active' : '' ?>">
+                Capacitor
+            </a>
+        </div>
+        
+        <?php if (isset($_GET['category'])): ?>
+            <div class="alert alert-info d-flex align-items-center">
+                <i class="fas fa-filter me-2"></i>
+                Showing tutorials in category: <strong class="ms-2"><?= htmlspecialchars($_GET['category']) ?></strong>
+                <a href="/posts" class="btn btn-sm btn-outline-info ms-auto">
+                    <i class="fas fa-times me-1"></i> Clear Filter
+                </a>
+            </div>
+        <?php endif; ?>
+    </div>
+
     <?php if (count($posts) < 1) : ?>
         <div class="my-6 p-5 text-center">
-            <p class="lead">No Tutorials Found 😭</p>
+            <p class="lead">
+                <?php if (isset($_GET['category'])): ?>
+                    No tutorials found in <strong><?= htmlspecialchars($_GET['category']) ?></strong> category 😭
+                <?php else: ?>
+                    No Tutorials Found 😭
+                <?php endif; ?>
+            </p>
+            <?php if (isset($_GET['category'])): ?>
+                <a href="/posts" class="btn btn-primary mt-2">
+                    <i class="fas fa-arrow-left me-1"></i> View All Tutorials
+                </a>
+            <?php endif; ?>
         </div>
     <?php else: ?>
         <div class="row">
