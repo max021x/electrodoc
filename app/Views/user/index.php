@@ -1,4 +1,18 @@
 <div class="container py-6">
+    <!-- Error Alert -->
+    <?php if (isset($_SESSION['error'])): ?>
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <?= htmlspecialchars($_SESSION['error']) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -84,7 +98,7 @@
                     </h5>
                 </div>
                 <div class="card-body">
-                    <form action="/user/change-password" method="POST">
+                    <form action="/password/change" method="POST">
                         <?= csrf_token() ?>
                         <div class="mb-3">
                             <label class="form-label">Current Password</label>
@@ -92,7 +106,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">New Password</label>
-                            <input type="password" class="form-control" name="new_password" required>
+                            <input type="password" class="form-control" name="password" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Confirm New Password</label>

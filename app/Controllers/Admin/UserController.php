@@ -113,8 +113,8 @@ class UserController
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
 
-        if (User::findByEmail($email) === false || $user->email === $email) {
-            if (!empty($email) || $user->email === $email) {
+        if (!User::findByEmail($email) || $user->email === $email) {
+            if (!empty($email)) {
                 $user->email = $email;
             }
         } 
