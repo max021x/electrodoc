@@ -30,7 +30,9 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="card-subtitle text-muted mb-1">Account Status</h6>
-                            <h2 class="card-title mb-0">Active</h2>
+                            <?php if (isset($user->status)): ?>
+                                <h2 class="card-title mb-0"><?=$user->status === 1 ? "Active✅" : "Inactive🛑" ?></h2>
+                            <?php endif ?>
                         </div>
                         <div class="bg-info bg-opacity-10 rounded-circle p-3">
                             <i class="fas fa-user-check fa-2x text-info"></i>
@@ -139,7 +141,7 @@
                                         </small>
                                     </td>
                                     <td>
-                                        <form action="/user/remove-saved-post/<?= $post->id ?>" method="POST" class="d-inline">
+                                        <form action="/posts/<?= $post->id ?>/delete" method="POST" class="d-inline">
                                             <?= csrf_token() ?>
                                             <button type="submit" class="btn btn-sm btn-outline-danger"
                                                 onclick="return confirm('Remove this post from saved?')">
@@ -162,7 +164,7 @@
         </div>
     </div>
 
-        <!-- Delete Account Section -->
+    <!-- Delete Account Section -->
     <div class="card shadow-sm border-danger w-50">
         <div class="card-header bg-white border-danger">
             <h5 class="mb-0 d-flex align-items-center text-danger">

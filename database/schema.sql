@@ -52,3 +52,13 @@ CREATE TABLE IF NOT EXISTS contactmessages (
     ip VARBINARY(16) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+-- saved Posts 
+CREATE TABLE IF NOT EXISTS saved_posts (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  saved_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+  FOREIGN KEY (post_id) REFERENCES posts (id) ON DELETE CASCADE,
+  UNIQUE(user_id, post_id) 
+);

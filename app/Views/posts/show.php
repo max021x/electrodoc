@@ -20,7 +20,7 @@
                                 <?= htmlspecialchars($post->category_name) ?>
                             </span>
                         <?php endif; ?>
-                        
+
                         <div class="text-muted d-flex align-items-center gap-3">
                             <?php if (isset($post->created_at)): ?>
                                 <span class="d-flex align-items-center fs-6 fs-md-base">
@@ -34,14 +34,14 @@
                             </span>
                         </div>
                     </div>
-                    
+
                     <h1 class="display-6 fw-bold mb-0 fs-3 fs-md-2 fs-lg-1"><?= htmlspecialchars($post->title) ?></h1>
                 </div>
 
                 <!-- Featured Image -->
                 <?php if (isset($post->image) && $post->image): ?>
                     <div class="p-4 p-md-5">
-                        <img src="/uploads/posts/<?= isset($post->image) ? $post->image : ''?>"
+                        <img src="/uploads/posts/<?= isset($post->image) ? $post->image : '' ?>"
                             alt="<?= htmlspecialchars($post->title) ?>"
                             class="img-fluid rounded w-100 shadow"
                             style="max-height: 500px; object-fit: cover;">
@@ -65,11 +65,14 @@
                             <button class="btn btn-outline-success btn-sm px-3 fs-6">
                                 <i class="fas fa-share-alt me-1"></i> Share
                             </button>
-                            <button class="btn btn-outline-info btn-sm px-3 fs-6">
-                                <i class="fas fa-bookmark me-1"></i> Save
-                            </button>
+                            <form action="/posts/<?= $post->id ?>/save" method="POST">
+                                <?=csrf_token() ?>
+                                <button class="btn btn-outline-info btn-sm px-3 fs-6">
+                                    <i class="fas fa-bookmark me-1"></i> Save
+                                </button>
+                            </form>
                         </div>
-                        
+
                         <!-- Author Info -->
                         <?php if (isset($author_name)): ?>
                             <div class="d-flex align-items-center">
@@ -102,12 +105,12 @@
                     <form action="/posts/<?= $post->id ?>/comments" method="POST">
                         <?= csrf_token() ?>
                         <div class="mb-4">
-                            <textarea class="form-control p-3 fs-6" 
-                                      id="commentContent" 
-                                      name="content" 
-                                      rows="4" 
-                                      placeholder="Share your thoughts about this post..." 
-                                      required></textarea>
+                            <textarea class="form-control p-3 fs-6"
+                                id="commentContent"
+                                name="content"
+                                rows="4"
+                                placeholder="Share your thoughts about this post..."
+                                required></textarea>
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary px-4 py-2 fs-6">
@@ -120,7 +123,7 @@
                 <!-- Comments List -->
                 <div class="px-4 px-md-5 pb-4 pb-md-5">
                     <h5 class="mb-4 border-bottom pb-3 fs-5 fs-md-4">Recent Comments</h5>
-                    
+
                     <?php if (empty($comments)): ?>
                         <div class="text-center py-5">
                             <i class="fas fa-comment-slash fa-3x fa-2x fa-md-3x text-muted mb-3"></i>
@@ -128,7 +131,7 @@
                         </div>
                     <?php else: ?>
                         <div class="row g-4">
-                            <?php foreach($comments as $comment): ?>
+                            <?php foreach ($comments as $comment): ?>
                                 <div class="col-12">
                                     <div class="card border-light shadow-sm">
                                         <div class="card-body p-4">
@@ -141,7 +144,7 @@
                                                 <div class="flex-grow-1">
                                                     <div class="d-flex justify-content-between align-items-start mb-2">
                                                         <div>
-                                                            <h6 class="mb-0 fs-6"><?=$comment->name?></h6>
+                                                            <h6 class="mb-0 fs-6"><?= $comment->name ?></h6>
                                                             <small class="text-muted fs-6">
                                                                 <i class="fas fa-clock me-1"></i>
                                                                 <?= date('M j, Y \a\t g:i A', strtotime($comment->created_at)) ?>
@@ -167,7 +170,7 @@
                 <a href="/posts" class="btn btn-outline-secondary px-4 py-2 mb-2 fs-6">
                     <i class="fas fa-list me-2"></i>View All Posts
                 </a>
-                
+
                 <div class="d-flex gap-2 mb-2">
                     <button class="btn btn-outline-dark px-3 py-2 fs-6">
                         <i class="fas fa-print me-1"></i> Print

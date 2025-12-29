@@ -45,11 +45,16 @@ $router->add('GET' , '/admin/contacts' , 'Admin\ContactController@index') ;
 $router->add('POST' , '/admin/contacts/{id}/delete' , 'Admin\ContactController@delete') ; 
 
 
-// user 
-$router->add("GET" , '/posts' , 'PostController@index') ; 
-$router->add("GET" , '/posts/{id}' , 'PostController@show') ; 
+// user contact
 $router->add("POST" , '/contact' , 'ContactController@store') ;
 
+// user Posts
+$router->add("GET" , '/posts' , 'PostController@index') ; 
+$router->add("GET" , '/posts/{id}' , 'PostController@show') ; 
 $router->add("POST" , '/posts/{id}/comments' , 'CommentController@store' , ['auth']) ; 
+
+// user Dashboard
 $router->add("GET" , '/dashboard' , 'UserDashboardController@index' , ['auth']);
+$router->add("POST" , '/posts/{id}/save' , 'UserDashboardController@save' , ['auth']) ; 
+$router->add("POST" , '/posts/{id}/delete' , 'UserDashboardController@delete' , ['auth']) ; 
 
