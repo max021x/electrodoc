@@ -218,7 +218,7 @@
                     <strong>Warning:</strong> This action cannot be undone.
                 </div>
                 <p>All your data including saved posts and comments will be permanently deleted.</p>
-                <form action="/user/delete-account" method="POST" id="deleteAccountForm">
+                <form action="/account/delete" method="POST" id="deleteAccountForm">
                     <?= csrf_token() ?>
                     <div class="mb-3">
                         <label class="form-label">Enter your password to confirm:</label>

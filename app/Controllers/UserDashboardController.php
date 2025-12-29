@@ -75,7 +75,7 @@ class UserDashboardController
             $_SESSION['error'] = "Invalid Credentials Check all fields again :(";
             Router::redirect("/dashboard");
         }
-        $user->save() ; 
+        $user->save();
         Router::redirect("/dashboard");
     }
 
@@ -111,5 +111,26 @@ class UserDashboardController
         // }
         SavedPost::deletePost($user, $post);
         Router::redirect("/dashboard");
+    }
+
+    public function deleteAccount()
+    {
+
+        $user = Auth::user();
+        // if(!$user) {
+
+        // }
+
+        $password = $_POST['password'];
+
+        if (!empty($password) && password_verify($password, $user->password)) {
+            $user->status = 0;
+            $user->save() ; 
+            Auth::logout();
+            Router::redirect('/') ; 
+        } else {
+            $_SESSION['error'] = "Invalid Credentials Check all fields again :(";
+            Router::redirect("/dashboard");
+        }
     }
 }

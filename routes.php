@@ -59,4 +59,5 @@ $router->add("POST" , '/posts/{id}/save' , 'UserDashboardController@save' , ['au
 $router->add("POST" , '/posts/{id}/delete' , 'UserDashboardController@delete' , ['auth']) ; 
 $router->add("POST" , '/email/update' , 'UserDashboardController@update' , ['auth']) ; 
 $router->add("POST" , '/password/change' , 'UserDashboardController@change' , ['auth']) ; 
+$router->add("POST" , '/account/delete' , 'UserDashboardController@deleteAccount' , ['auth']) ; 
 
