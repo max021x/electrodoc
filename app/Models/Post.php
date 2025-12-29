@@ -20,11 +20,16 @@ class Post extends Model
     public $updated_at;
 
 
-    public static function getRecent(?int $limit = null, ?int $page = null, ?string $search = null)
+    public static function getRecent(?string $category , ?int $limit = null, ?int $page = null, ?string $search = null)
     {
 
         $sql = "SELECT * FROM " . static::$table;
         $params = [];
+
+        if ($category !== null) {
+            $sql .= " WHERE category = ?";
+            $params = ["$category"];
+        }
 
         if ($search !== null) {
             $sql .= " WHERE title LIKE ? OR content LIKE ?";
@@ -83,7 +88,7 @@ class Post extends Model
     }
 
     public static function imageHandler($file)
-    {   
+    {
 
         $fileType = $file['type'];
 
@@ -107,7 +112,7 @@ class Post extends Model
         if (!move_uploaded_file($file['tmp_name'], $destination)) {
             exit("Error Did not Move");
         }
-        
-        return $fileName ; 
+
+        return $fileName;
     }
 }

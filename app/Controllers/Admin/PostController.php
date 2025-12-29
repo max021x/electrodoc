@@ -15,9 +15,10 @@ class PostController
     public function index()
     {
         Authorization::verify('dashboard');
-        $page = $_GET['page'] ?? 1;
+        $page = $_GET['page'] ?? 1 ; 
+        $category = $_GET['category'] ?? null ; 
         $limit = 12;
-        $posts = Post::getRecent(limit: $limit, page: $page);
+        $posts = Post::getRecent(category:$category , limit: $limit, page:$page);
         $total = Post::count();
 
         return Viewer::render(

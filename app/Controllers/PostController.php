@@ -14,9 +14,10 @@ class PostController
     public function index()
     {
         $page = $_GET['page'] ?? 1 ;
-        $search = isset($_GET['search']) ? $_GET['search'] : "" ;
-        $limit = 6 ; 
-        $posts = Post::getRecent(limit: $limit, page: $page , search:$search);
+        $search = isset($_GET['search']) ? $_GET['search'] : null ;
+        $category = isset($_GET['category']) ? $_GET['category'] : null ;
+        $limit = 12 ; 
+        $posts = Post::getRecent(limit: $limit, page: $page , search:$search , category:$category);
         $total = Post::count();
         return Viewer::render(
             'posts/index',
