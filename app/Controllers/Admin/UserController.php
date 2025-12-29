@@ -84,7 +84,8 @@ class UserController
     }
 
     public function edit($id)
-    {
+    {   
+        Authorization::verify('dashboard') ; 
         $user = User::find($id);
         return Viewer::render(
             'admin/user/edit',
