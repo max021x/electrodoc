@@ -19,7 +19,7 @@
             <!-- Back Navigation -->
             <div class="mb-4">
                 <a href="/posts" class="btn btn-outline-secondary btn-sm px-3 py-2">
-                    <i class="fas fa-arrow-left me-2"></i>Back to Posts
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tutorials
                 </a>
             </div>
 
@@ -30,7 +30,7 @@
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
                         <?php if (isset($post->category_name)): ?>
                             <span class="badge bg-primary px-3 py-2 mb-2">
-                                <i class="fas fa-tag me-1"></i>
+                                <i class="fas fa-microchip me-1"></i>
                                 <?= htmlspecialchars($post->category_name) ?>
                             </span>
                         <?php endif; ?>
@@ -72,33 +72,41 @@
                 <!-- Post Footer Actions -->
                 <div class="card-footer bg-light py-4 px-4 px-md-5">
                     <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-primary btn-sm px-3 fs-6">
-                                <i class="fas fa-thumbs-up me-1"></i> Like
+                        <!-- Save button only -->
+                        <form action="/posts/<?= $post->id ?>/save" method="POST">
+                            <?=csrf_token() ?>
+                            <button class="btn btn-outline-info btn-sm px-3 fs-6">
+                                <i class="fas fa-bookmark me-1"></i> Save Tutorial
                             </button>
-                            <button class="btn btn-outline-success btn-sm px-3 fs-6">
-                                <i class="fas fa-share-alt me-1"></i> Share
-                            </button>
-                            <form action="/posts/<?= $post->id ?>/save" method="POST">
-                                <?=csrf_token() ?>
-                                <button class="btn btn-outline-info btn-sm px-3 fs-6">
-                                    <i class="fas fa-bookmark me-1"></i> Save
-                                </button>
-                            </form>
-                        </div>
+                        </form>
 
-                        <!-- Author Info -->
-                        <?php if (isset($author_name)): ?>
-                            <div class="d-flex align-items-center">
-                                <div class="me-3">
-                                    <i class="fas fa-user-circle fa-2x fa-lg fa-md-2x text-secondary"></i>
+                        <!-- Category and Author Info -->
+                        <div class="d-flex align-items-center gap-4">
+                            <?php if (isset($post->category_name)): ?>
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <i class="fas fa-tag fa-lg text-primary"></i>
+                                    </div>
+                                    <div class="fs-6 fs-md-base">
+                                        <small class="text-muted d-block">Category</small>
+                                        <strong><?= htmlspecialchars($post->category_name) ?></strong>
+                                    </div>
                                 </div>
-                                <div class="fs-6 fs-md-base">
-                                    <small class="text-muted d-block">Written by</small>
-                                    <strong><?= htmlspecialchars($author_name) ?></strong>
+                            <?php endif; ?>
+
+                            <!-- Author Info -->
+                            <?php if (isset($author_name)): ?>
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                        <i class="fas fa-user-circle fa-2x fa-lg fa-md-2x text-secondary"></i>
+                                    </div>
+                                    <div class="fs-6 fs-md-base">
+                                        <small class="text-muted d-block">Written by</small>
+                                        <strong><?= htmlspecialchars($author_name) ?></strong>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,14 +116,14 @@
                 <div class="card-header bg-white py-4 px-4 px-md-5">
                     <h3 class="mb-0 d-flex align-items-center fs-4 fs-md-3">
                         <i class="fas fa-comments me-3 text-primary"></i>
-                        Comments
+                        Technical Discussion
                         <span class="badge bg-primary ms-3 px-3 py-2 fs-6"><?= count($comments) ?></span>
                     </h3>
                 </div>
 
                 <!-- Comment Form -->
                 <div class="card-body px-4 px-md-5 py-4 py-md-5">
-                    <h5 class="mb-4 fs-5 fs-md-4">Add your comment</h5>
+                    <h5 class="mb-4 fs-5 fs-md-4">Share your technical insights</h5>
                     <form action="/posts/<?= $post->id ?>/comments" method="POST">
                         <?= csrf_token() ?>
                         <div class="mb-4">
@@ -123,7 +131,7 @@
                                 id="commentContent"
                                 name="content"
                                 rows="4"
-                                placeholder="Share your thoughts about this post..."
+                                placeholder="Share your circuit insights, modifications, or questions..."
                                 required></textarea>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -136,12 +144,12 @@
 
                 <!-- Comments List -->
                 <div class="px-4 px-md-5 pb-4 pb-md-5">
-                    <h5 class="mb-4 border-bottom pb-3 fs-5 fs-md-4">Recent Comments</h5>
+                    <h5 class="mb-4 border-bottom pb-3 fs-5 fs-md-4">Technical Discussion</h5>
 
                     <?php if (empty($comments)): ?>
                         <div class="text-center py-5">
                             <i class="fas fa-comment-slash fa-3x fa-2x fa-md-3x text-muted mb-3"></i>
-                            <p class="text-muted mb-0 fs-6">No comments yet. Be the first to comment!</p>
+                            <p class="text-muted mb-0 fs-6">No technical discussion yet. Start the conversation!</p>
                         </div>
                     <?php else: ?>
                         <div class="row g-4">
@@ -182,17 +190,8 @@
             <!-- Related Actions -->
             <div class="d-flex flex-wrap justify-content-between align-items-center mt-4">
                 <a href="/posts" class="btn btn-outline-secondary px-4 py-2 mb-2 fs-6">
-                    <i class="fas fa-list me-2"></i>View All Posts
+                    <i class="fas fa-list me-2"></i>View All Tutorials
                 </a>
-
-                <div class="d-flex gap-2 mb-2">
-                    <button class="btn btn-outline-dark px-3 py-2 fs-6">
-                        <i class="fas fa-print me-1"></i> Print
-                    </button>
-                    <button class="btn btn-outline-dark px-3 py-2 fs-6">
-                        <i class="fas fa-envelope me-1"></i> Email
-                    </button>
-                </div>
             </div>
 
         </div>
