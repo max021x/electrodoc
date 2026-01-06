@@ -25,16 +25,17 @@ class UserDashboardController
     {
 
         $user = Auth::user();
-        // if(!$user) {
-
-        // }
+        if (!$user) {
+            $_SESSION['error'] = 'Access forbidden please login first';
+            Router::redirect("/login");
+        }
 
         $email = $_POST['email'];
         $confirm_password = $_POST['confirm_password'];
 
         if (!User::findByEmail($email) || $user->email === $email) {
             if (!empty($email) && !empty($confirm_password) && password_verify($confirm_password, $user->password)) {
-                // session success
+                $_SESSION['success'] = 'Email has updated successfully :)';
                 $user->email = $email;
             } else {
                 $_SESSION['error'] = "Invalid Credentials Check all fields again :(";
@@ -44,9 +45,7 @@ class UserDashboardController
             $_SESSION['error'] = "This email is already registered. Please use a different email address .";
             Router::redirect("/dashboard");
         }
-
-
-
+        
         $user->save();
         Router::redirect('/dashboard');
     }
@@ -108,7 +107,7 @@ class UserDashboardController
         $user = Auth::user()->id;
         if (!$user) {
             $_SESSION['error'] = 'Access forbidden please login first';
-            Router::redirect("/dashboard");
+            Router::redirect("/login");
         }
         $post = Post::find($id)->id;
         if (!$post) {
@@ -125,9 +124,10 @@ class UserDashboardController
     {
 
         $user = Auth::user();
-        // if(!$user) {
-
-        // }
+        if (!$user) {
+            $_SESSION['error'] = 'Access forbidden please login first';
+            Router::redirect("/login");
+        }
 
         $password = $_POST['password'];
 
