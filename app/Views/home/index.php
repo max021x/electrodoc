@@ -1,24 +1,27 @@
 <div>
     <!-- Success/Error Alerts -->
-    <?php if (isset($success)): ?>
+    <?php if (isset($_SESSION['success'])): ?>
         <div class="container text-center">
             <div class="mt-5 alert alert-success alert-dismissible fade show" role="alert">
                 <i class="fas fa-check-circle me-2"></i>
-                <?= htmlspecialchars($success) ?>
+                <?= htmlspecialchars($_SESSION['success']) ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     <?php endif; ?>
+    <?php unset($_SESSION['success']); ?>
 
-    <?php if (isset($error)): ?>
+    <?php if (isset($_SESSION['error'])): ?>
         <div class="container text-center">
             <div class="mt-5 alert alert-danger alert-dismissible fade show" role="alert">
                 <i class="fas fa-exclamation-circle me-2"></i>
-                <?= htmlspecialchars($error) ?>
+                <?= htmlspecialchars($_SESSION['error']) ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     <?php endif; ?>
+    <?php unset($_SESSION['error']); ?>
+
 
     <header class="header">
         <!-- hero -->
@@ -34,8 +37,8 @@
                         <div class="text-container p-4 d-flex flex-column justify-content-center h-100 mb-5">
                             <h1 class="display-3 fw-bold">ElectroDoc</h1>
                             <p class="lead">
-                                Master the world of electronics with comprehensive tutorials, circuit analysis, and hands-on projects. 
-                                From basic components to advanced microcontroller programming, ElectroDoc provides the knowledge 
+                                Master the world of electronics with comprehensive tutorials, circuit analysis, and hands-on projects.
+                                From basic components to advanced microcontroller programming, ElectroDoc provides the knowledge
                                 you need to bring your electronic creations to life.
                             </p>
 
@@ -75,8 +78,8 @@
                         Master <span class="text-secondary">Practical Electronics</span>
                     </h2>
                     <p class="fs-5">
-                        ElectroDoc bridges theory and practice with detailed guides on circuit design, component selection, 
-                        and embedded systems development. Our tutorials cover everything from Ohm's Law fundamentals to 
+                        ElectroDoc bridges theory and practice with detailed guides on circuit design, component selection,
+                        and embedded systems development. Our tutorials cover everything from Ohm's Law fundamentals to
                         advanced IoT implementations with ESP32 and Arduino platforms.
                     </p>
                 </div>
@@ -94,7 +97,7 @@
                             Our <span class="text-secondary">Expertise</span>
                         </h2>
                         <p>
-                            We provide comprehensive resources covering all aspects of modern electronics development 
+                            We provide comprehensive resources covering all aspects of modern electronics development
                             and project implementation for makers, students, and professionals.
                         </p>
                     </div>
@@ -146,7 +149,7 @@
                     <div class="text-container">
                         <h2>Technical Support & Collaboration</h2>
                         <p>
-                            Have questions about circuit design, component selection, or project troubleshooting? 
+                            Have questions about circuit design, component selection, or project troubleshooting?
                             Our electronics experts are ready to assist with technical guidance and collaboration opportunities.
                         </p>
                         <form action="/contact" method="POST">

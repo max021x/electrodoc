@@ -27,9 +27,11 @@ class ContactController
                 'ip' => $ip
             ];
             Contact::create($data);
-            return Viewer::render('home/index', ['success' => 'Thank you so much we got your message'], 'layouts/main');
+            $_SESSION['success'] = "Thank you so much we got your message";
+            Router::redirect('/');
         }
 
-        return Viewer::render('home/index', ['error' => 'All fields are required please fill them with true value'], 'layouts/main');
+        $_SESSION['error'] = 'All fields are required please fill them with true value';
+        Router::redirect('/');
     }
 }
