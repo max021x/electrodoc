@@ -1,16 +1,29 @@
 <div class="container py-6">
     <!-- Error Alert -->
-    <?php if (isset($_SESSION['error'])): ?>
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-circle me-2"></i>
-                <?= htmlspecialchars($_SESSION['error']) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <?= htmlspecialchars($_SESSION['success']) ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
         </div>
-    </div>
-    <?php unset($_SESSION['error']); ?>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <?= htmlspecialchars($_SESSION['error']) ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
 
     <!-- Header -->
@@ -45,7 +58,7 @@
                         <div>
                             <h6 class="card-subtitle text-muted mb-1">Account Status</h6>
                             <?php if (isset($user->status)): ?>
-                                <h2 class="card-title mb-0"><?=$user->status === 1 ? "Active✅" : "Inactive🛑" ?></h2>
+                                <h2 class="card-title mb-0"><?= $user->status === 1 ? "Active✅" : "Inactive🛑" ?></h2>
                             <?php endif ?>
                         </div>
                         <div class="bg-info bg-opacity-10 rounded-circle p-3">

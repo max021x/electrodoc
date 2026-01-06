@@ -81,8 +81,10 @@ class UserDashboardController
 
     public function save($id)
     {
-        // if(!Post::find($id)){
-        // }
+        if (!Post::find($id)) {
+            $_SESSION['error'] = 'Post Not Found';
+            Router::redirect('/posts');
+        }
 
         $user = Auth::user()->id;
 
@@ -97,20 +99,25 @@ class UserDashboardController
                 'post_id' => $id,
             ]
         );
-        // session for 
+        $_SESSION['success'] = 'Post has saved check your dashboard';
         Router::redirect("/posts/$id");
     }
 
     public function delete($id)
     {
         $user = Auth::user()->id;
-        // if(!$user) {
-        // }
-        $post = SavedPost::find($id);
-        // if(!$post) {
-        // }
-        var_dump($post) ; die ; 
+        if (!$user) {
+            $_SESSION['error'] = 'Access forbidden please login first';
+            Router::redirect("/dashboard");
+        }
+        $post = Post::find($id)->id;
+        if (!$post) {
+            $_SESSION['error'] = 'Post not found';
+            Router::redirect("/dashboard");
+        }
+
         SavedPost::deletePost($user, $post);
+        $_SESSION['success'] = 'Post has deleted successfully';
         Router::redirect("/dashboard");
     }
 
@@ -126,9 +133,9 @@ class UserDashboardController
 
         if (!empty($password) && password_verify($password, $user->password)) {
             $user->status = 0;
-            $user->save() ; 
+            $user->save();
             Auth::logout();
-            Router::redirect('/') ; 
+            Router::redirect('/');
         } else {
             $_SESSION['error'] = "Invalid Credentials Check all fields again :(";
             Router::redirect("/dashboard");

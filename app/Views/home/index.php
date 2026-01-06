@@ -8,8 +8,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
+        <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
-    <?php unset($_SESSION['success']); ?>
 
     <?php if (isset($_SESSION['error'])): ?>
         <div class="container text-center">
@@ -19,8 +19,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
+        <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
-    <?php unset($_SESSION['error']); ?>
 
 
     <header class="header">
