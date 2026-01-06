@@ -24,7 +24,8 @@ class AuthController
             Router::redirect('/');
         }
 
-        return Viewer::render('auth/login', ['dnone' => true , 'error' => "Invalid credentials email or password is not correct"], 'layouts/main');
+        $_SESSION['error'] = 'Invalid credentials email or password is not correct' ; 
+        Router::redirect('/login') ; 
     }
 
     public function logout()

@@ -1,17 +1,18 @@
-<?php if(isset($error)): ?>
+<?php if(isset($_SESSION['error'])): ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
             <div class="alert mt-1 alert-warning alert-dismissible fade show" role="alert">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-exclamation-triangle me-2"></i>
-                    <p class="mb-0"><?= htmlspecialchars($error) ?></p>
+                    <p class="mb-0"><?= htmlspecialchars($_SESSION['error']) ?></p>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     </div>
 </div>
+<?php unset($_SESSION['error']) ; ?>
 <?php endif; ?>
 
 <div class="d-flex justify-content-center mt-6 position-relative">
