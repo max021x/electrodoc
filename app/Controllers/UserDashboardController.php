@@ -45,7 +45,7 @@ class UserDashboardController
             $_SESSION['error'] = "This email is already registered. Please use a different email address .";
             Router::redirect("/dashboard");
         }
-        
+
         $user->save();
         Router::redirect('/dashboard');
     }
@@ -59,13 +59,15 @@ class UserDashboardController
         $confirm_password = $_POST['confirm_password'];
 
         $user = Auth::user();
-        // if(!$user) {
-
-        // }
+        if (!$user) {
+            $_SESSION['error'] = 'Access forbidden please login first';
+            Router::redirect("/login");
+        }
 
         if (!empty($current_password) && !empty($password) && !empty($confirm_password) && password_verify($current_password, $user->password)) {
             if ($password === $confirm_password) {
                 $user->password = password_hash($password, PASSWORD_DEFAULT);
+                $_SESSION['success'] = 'Password has updated successfully :)';
             } else {
                 $_SESSION['error'] = "Passwords Do No Match";
                 Router::redirect("/dashboard");
