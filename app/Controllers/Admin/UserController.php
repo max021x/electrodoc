@@ -55,19 +55,13 @@ class UserController
 
 
         if (User::findByEmail($email)) {
-            return Viewer::render(
-                'admin/user/create',
-                ['error' => 'This email is already registered. Please use a different email address .'],
-                'admin/layouts/main'
-            );
+            $_SESSION['error'] = 'This email is already registered. Please use a different email address .';
+            Router::redirect('/admin/users/create');
         }
 
         if ($password !== $confirm_password) {
-            return Viewer::render(
-                'admin/user/create',
-                ['error' => 'Passwords do not match.'],
-                'admin/layouts/main'
-            );
+            $_SESSION['error'] = 'Passwords do not match';
+            Router::redirect('/admin/users/create');
         }
 
         User::create(
@@ -79,13 +73,13 @@ class UserController
                 'status' => $status
             ]
         );
-
+        $_SESSION['success'] = 'User has created successfully :)';
         Router::redirect('/admin/users');
     }
 
     public function edit($id)
-    {   
-        Authorization::verify('dashboard') ; 
+    {
+        Authorization::verify('dashboard');
         $user = User::find($id);
         return Viewer::render(
             'admin/user/edit',
@@ -100,11 +94,8 @@ class UserController
         Authorization::verify('edit_user', $user);
 
         if (!$user) {
-            return Viewer::render(
-                'admin/user/edit',
-                ['error' => 'User not Found'],
-                'admin/layouts/main'
-            );
+            $_SESSION['error'] = "User not Found";
+            Router::redirect("/admin/users/$id/edit");
         }
 
         $name = $_POST['name'];
@@ -118,8 +109,7 @@ class UserController
             if (!empty($email)) {
                 $user->email = $email;
             }
-        } 
-        else {
+        } else {
             $_SESSION['error'] = "This email is already registered. Please use a different email address .";
             Router::redirect("/admin/users/$id/edit");
         }
@@ -140,6 +130,7 @@ class UserController
         }
 
         $user->save();
+        $_SESSION['success'] = "User has updated successfully :)";
         Router::redirect('/admin/users');
     }
 
@@ -147,11 +138,8 @@ class UserController
     {
         $user = User::find($id);
         if (!$user) {
-            return Viewer::render(
-                'admin/user/edit',
-                ['error' => 'User not Found'],
-                'admin/layouts/main'
-            );
+            $_SESSION['error'] = "User not Found";
+            Router::redirect("/admin/users");
         }
         if ($user->id === Auth::user()->id) {
             Auth::logout();
@@ -159,6 +147,7 @@ class UserController
             Router::redirect('/login');
         }
         $user->delete();
+        $_SESSION['success'] = "User has deleted successfully :)";
         Router::redirect('/admin/users');
     }
 }

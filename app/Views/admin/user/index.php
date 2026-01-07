@@ -1,4 +1,17 @@
 <div class="admin-header">
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <?= htmlspecialchars($_SESSION['success']) ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
     <div class="d-flex justify-content-between align-items-center">
         <div>
             <h1 class="h3 mb-0">Users Management</h1>
@@ -18,8 +31,8 @@
             <form action="/admin/users" method="GET" class="mb-0">
                 <div class="input-group input-group-sm" style="width: 200px;">
                     <span class="input-group-text"><i class="fas fa-search"></i></span>
-                    <input type="text" name="search" class="form-control form-control-sm" 
-                           placeholder="Search users..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                    <input type="text" name="search" class="form-control form-control-sm"
+                        placeholder="Search users..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
                 </div>
             </form>
 

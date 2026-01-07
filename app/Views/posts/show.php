@@ -1,5 +1,5 @@
 <div class="container py-5">
-    <!-- Error Alert -->
+    
     <?php if (isset($_SESSION['success'])): ?>
         <div class="row justify-content-center mb-3">
             <div class="col-12 col-lg-10 col-xl-9">

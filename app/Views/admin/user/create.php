@@ -10,57 +10,61 @@
     </div>
 </div>
 
-<!-- Error Alert -->
-<?php if (isset($error)): ?>
-<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-    <i class="fas fa-exclamation-circle me-2"></i>
-    <?= htmlspecialchars($error) ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="row justify-content-center mb-3">
+        <div class="col-12 col-lg-10 col-xl-9">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <?= htmlspecialchars($_SESSION['error']) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
 <div class="card shadow-sm mt-4">
     <div class="card-body">
         <form action="/admin/users/store" method="POST">
             <?= csrf_token() ?>
-            
+
             <div class="row g-3">
                 <!-- Name Field -->
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="name" name="name" 
-                               placeholder="Enter full name" required>
+                        <input type="text" class="form-control" id="name" name="name"
+                            placeholder="Enter full name" required>
                     </div>
                 </div>
-                
+
                 <!-- Email Field -->
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="email" name="email" 
-                               placeholder="name@example.com" required>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="name@example.com" required>
                     </div>
                 </div>
-                
+
                 <!-- Password Field -->
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="password" name="password" 
-                               placeholder="Enter password" required>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Enter password" required>
                     </div>
                 </div>
-                
+
                 <!-- Confirm Password Field -->
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="confirm_password" class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" 
-                               placeholder="Confirm password" required>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                            placeholder="Confirm password" required>
                     </div>
                 </div>
-                
+
                 <!-- Role Field -->
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -72,22 +76,22 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <!-- Status Field -->
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label">Account Status <span class="text-danger">*</span></label>
                         <div class="d-flex gap-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" 
-                                       id="status_active" value="1" checked>
+                                <input class="form-check-input" type="radio" name="status"
+                                    id="status_active" value="1" checked>
                                 <label class="form-check-label text-success" for="status_active">
                                     <i class="fas fa-check-circle me-1"></i> Active
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" 
-                                       id="status_inactive" value="0">
+                                <input class="form-check-input" type="radio" name="status"
+                                    id="status_inactive" value="0">
                                 <label class="form-check-label text-danger" for="status_inactive">
                                     <i class="fas fa-times-circle me-1"></i> Inactive
                                 </label>
@@ -96,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Form Actions -->
             <div class="mt-4 pt-3 border-top">
                 <div class="d-flex justify-content-between align-items-center">
