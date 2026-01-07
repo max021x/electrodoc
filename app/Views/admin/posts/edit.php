@@ -10,22 +10,31 @@
     </div>
 </div>
 
-<!-- Error Alert -->
-<?php if (isset($error)): ?>
-<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-    <i class="fas fa-exclamation-circle me-2"></i>
-    <?= htmlspecialchars($error) ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="row justify-content-center mb-3">
+        <div class="col-12 col-lg-10 col-xl-9">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <?= htmlspecialchars($_SESSION['success']) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <?php unset($_SESSION['success']); ?>
 <?php endif; ?>
 
-<!-- Success Alert -->
-<?php if (isset($success)): ?>
-<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-    <i class="fas fa-check-circle me-2"></i>
-    <?= htmlspecialchars($success) ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="row justify-content-center mb-3">
+        <div class="col-12 col-lg-10 col-xl-9">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <?= htmlspecialchars($_SESSION['error']) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
 <div class="card mt-4">
@@ -33,13 +42,13 @@
         <form id="editPostForm" action="/admin/posts/<?= $post->id ?>/update" method="POST" enctype="multipart/form-data">
             <?= csrf_token() ?>
             <input type="hidden" name="_method" value="PUT">
-            
+
             <!-- Title Field -->
             <div class="mb-3">
                 <label for="postTitle" class="form-label fw-semibold">Post Title <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="postTitle" name="title"
-                       value="<?= htmlspecialchars($post->title) ?>"
-                       placeholder="Enter post title here..." required>
+                    value="<?= htmlspecialchars($post->title) ?>"
+                    placeholder="Enter post title here..." required>
                 <div class="form-text">The main title of your blog post</div>
             </div>
 
@@ -58,41 +67,41 @@
 
             <!-- Current Image Display -->
             <?php if (!empty($post->image)): ?>
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Current Image</label>
-                <div class="border rounded p-3 bg-light">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <img src="/uploads/posts/<?= htmlspecialchars($post->image) ?>" 
-                                 alt="Current image" 
-                                 class="img-fluid rounded" 
-                                 style="max-height: 80px; max-width: 120px;">
-                            <div class="ms-3 text-start">
-                                <small class="text-muted d-block">Current featured image</small>
-                                <small><?= htmlspecialchars(basename($post->image)) ?></small>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Current Image</label>
+                    <div class="border rounded p-3 bg-light">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <img src="/uploads/posts/<?= htmlspecialchars($post->image) ?>"
+                                    alt="Current image"
+                                    class="img-fluid rounded"
+                                    style="max-height: 80px; max-width: 120px;">
+                                <div class="ms-3 text-start">
+                                    <small class="text-muted d-block">Current featured image</small>
+                                    <small><?= htmlspecialchars(basename($post->image)) ?></small>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="removeImage" name="remove_image" value="1">
-                                <label class="form-check-label text-danger" for="removeImage">
-                                    <i class="fas fa-trash me-1"></i> Remove Image
-                                </label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="removeImage" name="remove_image" value="1">
+                                    <label class="form-check-label text-danger" for="removeImage">
+                                        <i class="fas fa-trash me-1"></i> Remove Image
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="form-text small">Check "Remove Image" to delete the current image</div>
                 </div>
-                <div class="form-text small">Check "Remove Image" to delete the current image</div>
-            </div>
             <?php endif; ?>
 
             <!-- New Image Upload -->
             <div class="mb-3">
                 <label class="form-label fw-semibold">
                     <?php if (!empty($post->image)): ?>
-                    Replace Image
+                        Replace Image
                     <?php else: ?>
-                    Add Featured Image
+                        Add Featured Image
                     <?php endif; ?>
                 </label>
                 <div class="border rounded p-3 text-center bg-light">
@@ -116,9 +125,9 @@
                             <div class="text-start">
                                 <p class="mb-1 small">
                                     <?php if (!empty($post->image)): ?>
-                                    Upload new image (optional)
+                                        Upload new image (optional)
                                     <?php else: ?>
-                                    Upload featured image (optional)
+                                        Upload featured image (optional)
                                     <?php endif; ?>
                                 </p>
                                 <button type="button" id="chooseImageBtn" class="btn btn-sm btn-outline-primary">
@@ -135,8 +144,8 @@
             <!-- Content Field -->
             <div class="mb-3">
                 <label for="postContent" class="form-label fw-semibold">Post Content <span class="text-danger">*</span></label>
-                <textarea class="form-control" id="postContent" name="content" rows="6" 
-                          placeholder="Write your post content here..." required><?= htmlspecialchars($post->content) ?></textarea>
+                <textarea class="form-control" id="postContent" name="content" rows="6"
+                    placeholder="Write your post content here..." required><?= htmlspecialchars($post->content) ?></textarea>
                 <div class="form-text small">
                     Write your content clearly and engagingly
                 </div>
@@ -191,39 +200,39 @@
     const imagePreview = document.getElementById('imagePreview');
     const imageUploadArea = document.getElementById('imageUploadArea');
     const fileName = document.getElementById('fileName');
-    
+
     // Event listener for choose image button
     chooseImageBtn.addEventListener('click', function() {
         imageFileInput.click();
     });
-    
+
     // Event listener for file input change
     imageFileInput.addEventListener('change', function(event) {
         previewImage(event);
     });
-    
+
     // Event listener for remove image button
     removeImageBtn.addEventListener('click', function() {
         removeImage();
     });
-    
+
     // Image preview function
     function previewImage(event) {
         const input = event.target;
         const file = input.files[0];
-        
+
         if (file) {
             const reader = new FileReader();
-            
+
             reader.onload = function() {
                 const img = imagePreview.querySelector('img');
-                
+
                 img.src = reader.result;
                 fileName.textContent = file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name;
                 imagePreview.classList.remove('d-none');
                 imageUploadArea.classList.add('d-none');
             };
-            
+
             reader.readAsDataURL(file);
         }
     }
@@ -240,28 +249,28 @@
         const title = document.getElementById('postTitle').value.trim();
         const category = document.getElementById('postCategory').value;
         const content = document.getElementById('postContent').value.trim();
-        
+
         if (!title) {
             e.preventDefault();
             alert('Please enter a post title');
             document.getElementById('postTitle').focus();
             return;
         }
-        
+
         if (!category) {
             e.preventDefault();
             alert('Please select a category');
             document.getElementById('postCategory').focus();
             return;
         }
-        
+
         if (!content) {
             e.preventDefault();
             alert('Please enter post content');
             document.getElementById('postContent').focus();
             return;
         }
-        
+
         // Show loading state
         const submitBtn = e.target.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;

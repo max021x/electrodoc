@@ -15,10 +15,10 @@ class PostController
     public function index()
     {
         Authorization::verify('dashboard');
-        $page = $_GET['page'] ?? 1 ; 
-        $category = $_GET['category'] ?? null ; 
+        $page = $_GET['page'] ?? 1;
+        $category = $_GET['category'] ?? null;
         $limit = 12;
-        $posts = Post::getRecent(category:$category , limit: $limit, page:$page);
+        $posts = Post::getRecent(category: $category, limit: $limit, page: $page);
         $total = Post::count();
 
         return Viewer::render(
@@ -48,9 +48,9 @@ class PostController
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $fileName  = Post::imageHandler($_FILES['image']);
-            if($fileName === false) {
-                Router::redirect('/admin/posts/create') ; 
-            }   
+            if ($fileName === false) {
+                Router::redirect('/admin/posts/create');
+            }
         }
 
         $data = [
@@ -63,6 +63,7 @@ class PostController
         Post::create(
             $data
         );
+        $_SESSION['success'] = 'Post has been created successfully :)';
         Router::redirect('/admin/posts');
     }
 
@@ -100,6 +101,11 @@ class PostController
         $fileName = "";
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $fileName  = Post::imageHandler($_FILES['image']);
+
+            if ($fileName === false) {
+                Router::redirect("/admin/posts/$id/edit");
+            }
+
             if (!empty($post->image)) {
                 $oldImagePath = __DIR__ . '/../../../public/uploads/posts/' . basename($post->image);
                 if (file_exists($oldImagePath)) {
@@ -121,6 +127,7 @@ class PostController
         }
 
         $post->save();
+        $_SESSION['success'] = 'Post has updated successfully :)';
         Router::redirect('/admin/posts');
     }
 
@@ -135,6 +142,7 @@ class PostController
             }
         }
         $post->delete($id);
+        $_SESSION['success'] = 'Post has been deleted successfully :)';
         Router::redirect('/admin/posts');
     }
 }
