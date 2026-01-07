@@ -21,8 +21,8 @@ class ContactController
         $total = Contact::count();
         return Viewer::render(
             'admin/contacts/index',
-            [   
-                'active' => 'contacts' , 
+            [
+                'active' => 'contacts',
                 'contacts' => $contacts,
                 'currentPage' => $page,
                 'totalPages' => ceil($total / $limit)
@@ -34,10 +34,12 @@ class ContactController
     public function delete($id)
     {
         $contact = Contact::find($id);
-        // if(!$contact) {
-        // view with the error of undefined id
-        // }   
+        if (!$contact) {
+            $_SESSION['error'] = 'Contact Message Not Found :(';
+            Router::redirect('/admin/contacts');
+        }
         $contact->delete($id);
+        $_SESSION['success'] = 'Message has deleted successfully :)';
         Router::redirect('/admin/contacts');
     }
 }
