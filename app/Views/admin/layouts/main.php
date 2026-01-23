@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/fontawesome.css">
     <link rel="stylesheet" href="/css/dashboard.css">
-    <script src="https://unpkg.com/alpinejs" defer></script>
+    <!-- <script src="https://unpkg.com/alpinejs" defer></script> -->
 </head>
 
 <body>

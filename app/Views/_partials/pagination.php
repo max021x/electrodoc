@@ -1,4 +1,3 @@
-  <!-- Bootstrap 5.3 Pagination -->
   <?php
     $queryParams = $_GET;
     unset($queryParams['page']);
@@ -9,7 +8,6 @@
         return htmlspecialchars(http_build_query($params));
     }
 
-    // Smart range calculation (show current page ± 2 pages)
     $range = 2;
     $start = max(1, $currentPage - $range);
     $end = min($totalPages, $currentPage + $range);
@@ -19,7 +17,6 @@
       <nav aria-label="Posts pagination" class="mt-5">
           <ul class="pagination justify-content-center">
 
-              <!-- Previous Page Link -->
               <li class="page-item <?= $currentPage == 1 ? 'disabled' : '' ?>">
                   <a class="page-link"
                       href="?<?= buildQueryString($queryParams, $currentPage - 1) ?>"
@@ -28,7 +25,6 @@
                   </a>
               </li>
 
-              <!-- First Page (with ellipsis if needed) -->
               <?php if ($start > 1): ?>
                   <li class="page-item">
                       <a class="page-link" href="?<?= buildQueryString($queryParams, 1) ?>">1</a>
@@ -40,7 +36,6 @@
                   <?php endif; ?>
               <?php endif; ?>
 
-              <!-- Page Range -->
               <?php for ($i = $start; $i <= $end; $i++): ?>
                   <li class="page-item <?= $i == $currentPage ? 'active' : '' ?>">
                       <?php if ($i == $currentPage): ?>
@@ -51,7 +46,6 @@
                   </li>
               <?php endfor; ?>
 
-              <!-- Last Page (with ellipsis if needed) -->
               <?php if ($end < $totalPages): ?>
                   <?php if ($end < $totalPages - 1): ?>
                       <li class="page-item disabled">
@@ -63,7 +57,6 @@
                   </li>
               <?php endif; ?>
 
-              <!-- Next Page Link -->
               <li class="page-item <?= $currentPage == $totalPages ? 'disabled' : '' ?>">
                   <a class="page-link"
                       href="?<?= buildQueryString($queryParams, $currentPage + 1) ?>"
