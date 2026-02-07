@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS contactmessages (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     message TEXT NOT NULL,
-    ip VARBINARY(16) NOT NULL,
+    ip VARCHAR(16) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 -- saved Posts 
