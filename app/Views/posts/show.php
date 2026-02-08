@@ -1,5 +1,5 @@
 <div class="container py-5">
-    
+
     <?php if (isset($_SESSION['success'])): ?>
         <div class="row justify-content-center mb-3">
             <div class="col-12 col-lg-10 col-xl-9">
@@ -70,6 +70,13 @@
                 <?php if (isset($post->image) && $post->image): ?>
                     <div class="p-4 p-md-5">
                         <img src="/uploads/posts/<?= isset($post->image) ? $post->image : '' ?>"
+                            alt="<?= htmlspecialchars($post->title) ?>"
+                            class="img-fluid rounded w-100 shadow"
+                            style="max-height: 500px; object-fit: cover;">
+                    </div>
+                <?php else: ?>
+                    <div class="p-4 p-md-5">
+                        <img src="/uploads/posts/default.jpg"
                             alt="<?= htmlspecialchars($post->title) ?>"
                             class="img-fluid rounded w-100 shadow"
                             style="max-height: 500px; object-fit: cover;">

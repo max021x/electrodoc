@@ -18,7 +18,7 @@
                 Capacitor
             </a>
         </div>
-        
+
         <?php if (isset($_GET['category'])): ?>
             <div class="alert alert-info d-flex align-items-center">
                 <i class="fas fa-filter me-2"></i>
@@ -50,7 +50,12 @@
             <?php foreach ($posts as $post): ?>
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
-                        <img class="w-100 img-fluid" src="/uploads/posts/<?= isset($post->image) ? $post->image : '' ?>" class="card-img-top" alt="<?= htmlspecialchars($post->title) ?>">
+                        <?php if (isset($post->image) && $post->image): ?>
+                            <img class="w-100 img-fluid" src="/uploads/posts/<?= $post->image ?>" class="card-img-top" alt="<?= htmlspecialchars($post->title) ?>">
+                        <?php else: ?>
+                            <img class="w-100 img-fluid" src="/uploads/posts/default.jpg" class="card-img-top" alt="<?= htmlspecialchars($post->title) ?>">
+                        <?php endif; ?>
+
                         <div class="card-body">
                             <div class="mb-2">
                                 <span class="badge bg-primary"><?= htmlspecialchars($post->category ?? 'Electronics') ?></span>
