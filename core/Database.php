@@ -42,7 +42,7 @@ class Database
         };
     }
 
-    public function query(string $sql, array $params = []): PDOStatement
+    public function query(string $sql, array $params = []) 
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
