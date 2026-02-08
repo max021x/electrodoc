@@ -17,8 +17,9 @@ class PostController
         Authorization::verify('dashboard');
         $page = $_GET['page'] ?? 1;
         $category = $_GET['category'] ?? null;
-        $limit = 1;
-        $posts = Post::getRecent(category: $category, limit: $limit, page: $page);
+        $search = $_GET['search'] ?? null ; 
+        $limit = 3;
+        $posts = Post::getRecent(category: $category, limit: $limit, page: $page , search:$search);
         $total = Post::count();
 
         return Viewer::render(

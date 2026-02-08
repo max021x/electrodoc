@@ -1,5 +1,5 @@
 <div class="admin-header">
-    
+
     <?php if (isset($_SESSION['success'])): ?>
         <div class="row mb-4">
             <div class="col-12">
@@ -29,8 +29,10 @@
         <h5 class="mb-0">All Posts</h5>
         <div class="d-flex gap-2">
             <div class="input-group input-group-sm" style="width: 200px;">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-                <input type="text" class="form-control form-control-sm" placeholder="Search posts...">
+                <form action="" class="btn-group" method="get">
+                    <input type="text" name="search" class="form-control form-control-sm" placeholder="Search posts...">
+                    <button class="btn btn-group input-group-text"><i class="fas fa-search"></i></button>
+                </form>
             </div>
         </div>
     </div>
