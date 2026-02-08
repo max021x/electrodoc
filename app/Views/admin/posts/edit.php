@@ -110,8 +110,8 @@
                             <div class="d-flex align-items-center">
                                 <img src="" alt="Preview" class="img-fluid rounded" style="max-height: 80px; max-width: 120px;">
                                 <div class="ms-3 text-start">
-                                    <small class="text-muted d-block">New image selected</small>
-                                    <small id="fileName"></small>
+                                    <small class="text-muted d-none d-sm-block">New image selected</small>
+                                    <small id="fileName" class="d-none d-sm-block"></small>
                                 </div>
                             </div>
                             <button type="button" id="removeImageBtn" class="btn btn-sm btn-danger">
